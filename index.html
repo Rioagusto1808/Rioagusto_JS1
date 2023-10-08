@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Java Script</title>
+</head>
+<body>
+
+<h2>JavaScript if .. else</h2>
+<p id="12345"></p>
+
+<script>
+const hour = new Date().getHours(); 
+let greeting;
+
+if (hour < 18) {
+  greeting = "Good day";
+} else {
+  greeting = "Good evening";
+}
+
+document.getElementById("12345").innerHTML = greeting;
+</script>
+
+
+
+
+<!-- SwitchCase -->
+<h2>JavaScript switchCase</h2>
+<p id="qwerty"></p>
+<script>
+let day;
+switch (new Date().getDay()) {
+  case 0:
+    day = "sunday";
+    break;
+  case 1:
+    day = "Monday";
+    break;
+  case 2:
+    day = "Tuesday";
+    break;
+  case 3:
+    day = "Wednesday";
+    break;
+  case 4:
+    day = "Thursday";
+    break;
+  case 5:
+    day = "Friday";
+    break;
+  case  6:
+    day = "Saturday";
+}
+document.getElementById("qwerty").innerHTML = "Today is " + day;
+</script>
+
+
+<!-- for Statement -->
+<h2>JavaScript ForStatement</h2>
+<button type="button" onclick="myFunction()">Diklik Dong!</button>
+
+<p id="abc1"></p>
+<p id="abc2"></p>
+
+<script>
+function myFunction() {
+  document.getElementById("abc1").innerHTML = "Hallo Semua";
+  document.getElementById("abc2").innerHTML = "Jalan Jalan yuk";
+}
+</script>
+
+<!-- While -->
+<h2>JavaScript While</h2>
+<p id="123"></p>
+
+<script>
+let text = "";
+let i = 1;
+while (i < 30) {
+  text += "<br>hari ini tanggal " + i;
+  i++;
+}
+document.getElementById("123").innerHTML = text;
+</script>
+
+
+
+<a href="index2.html"><button>Next</button></a>
+</body>
+
+</html>

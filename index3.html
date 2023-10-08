@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar JavaScript</title>
+</head>
+<body>
+    <!-- If/Else -->
+<h2>JavaScript nested/if</h2>
+<p id="ome"></p>
+<script>
+const time = new Date().getHours();
+let greeting;
+if (time < 10) {
+  greeting = "Rio, Go Breakfast";
+} else if (time < 15) {
+  greeting = "Rio, Go Lunch";
+} else {
+  greeting = "Rio, Go Dinner";
+}
+document.getElementById("ome").innerHTML = greeting;
+</script>
+    
+    <!-- JavaScript function -->
+<h2>JavaScript Function</h2>
+<p id="123"></p>
+
+<script>
+let text = "Suhu hari ini adalah" + toCelsius(77) + " Celsius.";
+document.getElementById("123").innerHTML = text;
+
+function toCelsius(fahrenheit) {
+  return (5/9) * (fahrenheit-32);
+} 
+</script>
+
+
+<a href="index2.html"><button>Back</button></a>
+
+</body>
+</html>
