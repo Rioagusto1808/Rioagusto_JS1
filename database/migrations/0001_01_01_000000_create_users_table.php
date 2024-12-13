@@ -15,10 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('nomor_hp')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->enum('status', ['inactive', 'active', 'banned']);
             $table->timestamps();
+
+            $table->unsignedBigInteger('guru_id')->nullable();
+            $table->foreign('guru_id')->references('id')->on('guru')->onDelete('set null');
+            $table->foreignUuid('profile_picture')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
