@@ -1,8 +1,11 @@
 <x-app-layout>
-    <x-message></x-message>
     <div class="container">
-        <h1>Tambah Guru</h1>
-        <form action="{{ route('guru.store') }}" method="POST">
+        <h1 class="mb-4">Tambah Guru</h1>
+        <form
+            action="{{ route('guru.store') }}"
+            method="POST"
+            class="shadow-lg p-4 rounded-3 bg-light"
+        >
             @csrf
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>

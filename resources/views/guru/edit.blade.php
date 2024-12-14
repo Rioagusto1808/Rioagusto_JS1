@@ -1,8 +1,11 @@
 <x-app-layout>
-    <x-message></x-message>
     <div class="container">
-        <h1>Edit Guru</h1>
-        <form action="{{ route('guru.update', $guru->id) }}" method="POST">
+        <h1 class="mb-4">Edit Guru</h1>
+        <form
+            action="{{ route('guru.update', $guru->id) }}"
+            method="POST"
+            class="shadow-lg p-4 rounded-3 bg-light"
+        >
             @csrf
             @method('PUT')
             <div class="mb-3">

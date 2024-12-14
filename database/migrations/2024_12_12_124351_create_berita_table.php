@@ -10,12 +10,14 @@ return new class extends Migration
     {
         Schema::create('berita', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
             $table->string('judul');
             $table->text('content');
             $table->enum('status', ['draft', 'published', 'archived']);
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('file_id')->nullable()->constrained('files')->onDelete('set null');
+
         });
     }
 

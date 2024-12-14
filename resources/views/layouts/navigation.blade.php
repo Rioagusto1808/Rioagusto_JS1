@@ -12,7 +12,7 @@
     </head>
     <body>
         <nav
-            class="navbar navbar-expand-lg navbar-light border-bottom border-gray-100"
+            class="navbar navbar-expand-lg navbar-light border-bottom border-gray-100 sticky-top"
             style="background-color: #007bff"
         >
             <div class="container-fluid">
@@ -89,7 +89,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="/siswa">
                                             Data Siswa
                                         </a>
                                     </li>
@@ -117,7 +117,7 @@
                         <li class="nav-item">
                             <a
                                 class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
-                                href="{{ route('dashboard') }}"
+                                href="/penerimaan"
                             >
                                 {{ __('PPBD') }}
                             </a>
@@ -130,9 +130,9 @@
                         <li class="nav-item">
                             <a
                                 class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
-                                href="{{ route('dashboard') }}"
+                                href="/berita"
                             >
-                                {{ __('Galeri') }}
+                                {{ __('Berita') }}
                             </a>
                         </li>
                     </ul>
@@ -140,13 +140,37 @@
                     <ul class="navbar-nav justify-content-start">
                         <!-- Links akan tetap di kiri -->
                         <!-- Dashboard Link -->
-                        <li class="nav-item">
+                        <li class="nav-item dropdown">
                             <a
                                 class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
-                                href="{{ route('dashboard') }}"
+                                href="#"
+                                data-bs-toggle="dropdown"
                             >
-                                {{ __('Berita') }}
+                                {{ __('Jadwal & Kelas') }}
                             </a>
+                            <ul
+                                class="dropdown-menu"
+                                style="border-radius: 10px"
+                            >
+                                <li>
+                                    <a class="dropdown-item" href="/kelas">
+                                        Kelas
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        href="/mata_pelajaran"
+                                    >
+                                        Mata Pelajaran
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/jadwal">
+                                        Tahun Ajaran & Mata Pelajaran
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
 

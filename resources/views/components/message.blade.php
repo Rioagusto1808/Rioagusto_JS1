@@ -2,9 +2,10 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
 />
+
 @if (Session::has('success'))
     <div
-        class="alert alert-success alert-dismissible fade show custom-alert"
+        class="alert alert-success alert-dismissible fade show custom-alert-success"
         role="alert"
         id="successAlert"
     >
@@ -21,71 +22,106 @@
             />
         </svg>
         {{ Session::get('success') }}
-        <button
-            style="padding: 10px"
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-        ></button>
     </div>
 @endif
 
 @if (Session::has('warning'))
     <div
-        class="alert alert-warning alert-dismissible fade show custom-alert"
+        class="alert alert-warning alert-dismissible fade show custom-alert-warning"
         role="alert"
         id="warningAlert"
     >
         {{ Session::get('warning') }}
-        <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-        ></button>
     </div>
 @endif
 
 @if (Session::has('error'))
     <div
-        class="alert alert-danger alert-dismissible fade show custom-alert"
+        class="alert alert-danger alert-dismissible fade show custom-alert-error"
         role="alert"
+        id="errorAlert"
     >
         {{ Session::get('error') }}
-        <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-        ></button>
     </div>
 @endif
 
 <style>
-    .custom-alert {
+    .custom-alert-success,
+    .custom-alert-warning,
+    .custom-alert-error {
         position: fixed;
         top: 80px;
-        right: 20px;
+        left: 140px;
         z-index: 1050;
         width: 250px;
         max-width: 500px;
-        height: 29px;
-        overflow: hidden;
+        height: 45px;
         padding: 10px;
         line-height: 1.5;
         display: flex;
         align-items: center;
-        border-radius: 0;
-        background: linear-gradient(to right, #aee3ae, #e6e6e6);
-        border-left: 5px solid #03d803;
+        border-radius: 8px;
         font-family: 'Poppins', sans-serif;
         color: black;
-        font-size: 8px;
+        font-size: 14px;
+        opacity: 0;
+        animation: slideIn 0.5s forwards;
+    }
+
+    .custom-alert-success {
+        background: linear-gradient(to right, #d4edda, #aee3ae);
+        border-left: 5px solid #03d803;
+    }
+
+    .custom-alert-warning {
+        background: linear-gradient(to right, #fff3cd, #f9e6b4);
+        border-left: 5px solid #ffc107;
+    }
+
+    .custom-alert-error {
+        background: linear-gradient(to right, #f8d7da, #f3a9b3);
+        border-left: 5px solid #dc3545;
     }
 
     .btn-close:focus {
         outline: none !important;
         box-shadow: none !important;
     }
+
+    @keyframes slideIn {
+        0% {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* Animasi untuk keluar alert */
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+    }
+
+    /* Menambahkan kelas untuk animasi keluar */
+    .fade-out {
+        animation: fadeOut 0.5s forwards;
+    }
 </style>
+
+<script>
+    // Menunda animasi keluar setelah 5 detik
+    setTimeout(function () {
+        let alerts = document.querySelectorAll('.alert');
+        alerts.forEach((alert) => {
+            alert.classList.add('fade-out');
+        });
+    }, 5000); // 5000 ms = 5 detik
+</script>

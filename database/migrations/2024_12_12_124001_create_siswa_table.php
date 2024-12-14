@@ -17,6 +17,8 @@ return new class extends Migration
             $table->text('alamat');
             $table->year('tahun_masuk');
             $table->year('tahun_lulus')->nullable();
+            $table->enum('status', ['lulus', 'belum lulus']);
+            $table->string('kelas');
             $table->timestamps();
         });
     }

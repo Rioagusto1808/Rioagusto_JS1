@@ -19,7 +19,7 @@ class UserController extends Controller
 
             return redirect('/login')->withErrors(['error' => 'Akses di tolak, anda tidak memiliki izin !']);
         }
-        $users = User::with('guru', 'roles')->paginate(5); // Mendapatkan semua pengguna beserta guru yang terhubung
+        $users = User::with('guru', 'roles')->paginate(10); // Mendapatkan semua pengguna beserta guru yang terhubung
 
         return view('users.index', compact('users'));
     }
@@ -89,7 +89,7 @@ class UserController extends Controller
             $user->syncRoles($request->role);
         }
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('users.index')->with('success', 'User Berhasil Dibuat.');
     }
 
     public function edit($id)
@@ -144,7 +144,7 @@ class UserController extends Controller
             $user->syncRoles($request->input('role', []));
         }
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('users.index')->with('success', 'User Berhasil Diperbarui.');
     }
 
     // Delete: Menghapus pengguna
@@ -157,6 +157,6 @@ class UserController extends Controller
         }
         $user->delete();
 
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('users.index')->with('success', 'User Berhasil Dihapus.');
     }
 }

@@ -1,8 +1,11 @@
 <x-app-layout>
     <div class="container">
-        <h1>Edit User</h1>
-
-        <form action="{{ route('users.update', $user) }}" method="POST">
+        <h1 class="mb-4">Edit User</h1>
+        <form
+            action="{{ route('users.update', $user) }}"
+            class="shadow-lg p-4 rounded-3 bg-light"
+            method="POST"
+        >
             @csrf
             @method('PUT')
 
@@ -12,9 +15,8 @@
                     type="text"
                     name="name"
                     id="name"
-                    class="form-control"
+                    class="form-control shadow-sm"
                     value="{{ old('name', $user->name) }}"
-                    required
                 />
             </div>
 
@@ -24,9 +26,8 @@
                     type="email"
                     name="email"
                     id="email"
-                    class="form-control"
+                    class="form-control shadow-sm"
                     value="{{ old('email', $user->email) }}"
-                    required
                 />
             </div>
 
@@ -36,14 +37,18 @@
                     type="text"
                     name="nomor_hp"
                     id="nomor_hp"
-                    class="form-control"
+                    class="form-control shadow-sm"
                     value="{{ old('nomor_hp', $user->nomor_hp) }}"
                 />
             </div>
 
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
-                <select name="status" id="status" class="form-control" required>
+                <select
+                    name="status"
+                    id="status"
+                    class="form-control shadow-sm"
+                >
                     <option
                         value="active"
                         {{ $user->status == 'active' ? 'selected' : '' }}
@@ -67,7 +72,11 @@
 
             <div class="mb-3">
                 <label for="guru_id" class="form-label">Guru</label>
-                <select name="guru_id" id="guru_id" class="form-control">
+                <select
+                    name="guru_id"
+                    id="guru_id"
+                    class="form-control shadow-sm"
+                >
                     <option value="">-- Select Guru --</option>
                     @foreach ($gurus as $guru)
                         <option
@@ -86,7 +95,7 @@
                     type="password"
                     name="password"
                     id="password"
-                    class="form-control"
+                    class="form-control shadow-sm"
                 />
                 @error('password')
                     <div class="text-danger">{{ $message }}</div>
@@ -101,24 +110,24 @@
                     type="password"
                     name="password_confirmation"
                     id="password_confirmation"
-                    class="form-control"
+                    class="form-control shadow-sm"
                 />
                 @error('password_confirmation')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
-            <div class="form-group">
-                <label>Roles</label>
-                <div class="form-check">
+            <div class="form-group mb-4">
+                <label class="font-weight-medium">Roles</label>
+                <div class="d-flex flex-wrap">
                     @if ($roles->isNotEmpty())
                         @foreach ($roles as $role)
-                            <div class="form-check">
+                            <div class="form-check m-2">
                                 <input
                                     {{ $hasRoles->contains($role->id) ? 'checked' : '' }}
                                     id="role-{{ $role->id }}"
                                     type="checkbox"
-                                    class="form-check-input"
+                                    class="form-check-input shadow-sm"
                                     name="role[]"
                                     value="{{ $role->name }}"
                                 />
@@ -133,7 +142,10 @@
                     @endif
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Update User</button>
+
+            <button type="submit" class="btn btn-primary shadow-sm">
+                Update User
+            </button>
         </form>
     </div>
 </x-app-layout>
