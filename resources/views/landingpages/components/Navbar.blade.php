@@ -18,7 +18,9 @@
                 class="logos"
                 id="imgs"
             />
-            <h1 class="logos" style="margin-left:10px; font-size:20px;">SD Negeri Peraduan Waras</h1>
+            <h1 class="logos" style="margin-left: 10px; font-size: 20px">
+                SD Negeri Peraduan Waras
+            </h1>
         </a>
 
         <!-- Hamburger Button -->
@@ -38,11 +40,18 @@
             x-transition
             class="navbar-collapse"
             :class="{'show': isOpen}"
-            style="border-radius: 10px; background-color: rgb(0, 92, 224); width: 100%; box-sizing: border-box; padding-left: 20px; padding-right: 20px;"
+            style="
+                border-radius: 10px;
+                background-color: rgb(0, 92, 224);
+                width: 100%;
+                box-sizing: border-box;
+                padding-left: 20px;
+                padding-right: 20px;
+            "
         >
             <ul class="navbar-nav ms-auto">
                 <!-- Beranda -->
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a
                         class="nav-link text-white"
                         href="/"
@@ -65,13 +74,42 @@
                         Profile Sekolah
                     </a>
                     <ul class="dropdown-menu" style="border-radius: 10px">
-                        <li><a class="dropdown-item" href="/sambutan-kepala-sekolah">Sambutan Kepala Sekolah</a></li>
-                        <li><a class="dropdown-item" href="/profile-sekolah">Profile Sekolah</a></li>
-                        <li><a class="dropdown-item" href="/visi-misi">Visi & Misi</a></li>
-                        <li><a class="dropdown-item" href="/struktur-organisasi">Struktur Organisasi</a></li>
-                        <li><a class="dropdown-item" href="/akreditasi-sekolah">Akreditasi Sekolah</a></li>
-                        <li><a class="dropdown-item" href="/fasilitas">Fasilitas</a></li>
-                        
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/sambutan-kepala-sekolah"
+                            >
+                                Sambutan Kepala Sekolah
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/profile-sekolah">
+                                Profile Sekolah
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/visi-misi">
+                                Visi & Misi
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/struktur-organisasi"
+                            >
+                                Struktur Organisasi
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/akreditasi-sekolah">
+                                Akreditasi Sekolah
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/fasilitas">
+                                Fasilitas
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -83,13 +121,18 @@
                         id="alumniDropdown"
                         role="button"
                     >
-                       Data Alumni
+                        Data Alumni
                     </a>
                 </li>
 
                 <!-- Hubungi Kami -->
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/hubungi-kami" id="hubungiDropdown" role="button">
+                    <a
+                        class="nav-link text-white"
+                        href="/hubungi-kami"
+                        id="hubungiDropdown"
+                        role="button"
+                    >
                         Hubungi Kami
                     </a>
                 </li>
@@ -97,15 +140,13 @@
                 <!-- Berita -->
                 <li class="nav-item">
                     <a
-                        class="nav-link  text-white"
+                        class="nav-link text-white"
                         href="/full-berita"
                         id="beritaDropdown"
                         role="button"
-                       
                     >
                         Berita
                     </a>
-                    
                 </li>
 
                 <!-- Galeri -->
@@ -115,7 +156,6 @@
                         href="/full-galeri"
                         id="galeriDropdown"
                         role="button"
-                        
                     >
                         Galeri
                     </a>
@@ -134,14 +174,26 @@
                     </a>
                     <ul class="dropdown-menu" style="border-radius: 10px">
                         <li><a class="dropdown-item" href="/ppdb">PPDB</a></li>
-                        <li><a class="dropdown-item" href="/data-siswa">Data Siswa</a></li>
-                        <li><a class="dropdown-item" href="/data-guru">Data Guru</a></li>
+                        <li>
+                            <a class="dropdown-item" href="/data-siswa">
+                                Data Siswa
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/data-guru">
+                                Data Guru
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
                 <!-- Layanan Informasi Sekolah -->
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="layanan-informasi" role="button">
+                    <a
+                        class="nav-link text-white"
+                        href="layanan-informasi"
+                        role="button"
+                    >
                         Layanan Informasi
                     </a>
                 </li>
@@ -161,7 +213,6 @@
                     @else
                         <!-- Jika pengguna belum login, tampilkan link ke Login -->
                         <a
-                            
                             class="nav-link btn"
                             href="{{ route('login') }}"
                             role="button"
@@ -177,13 +228,12 @@
 @yield('breadcrumb')
 
 <style>
-    .dropdown-item{
+    .dropdown-item {
         font-size: 15px;
     }
     .navbar {
         display: flex;
         align-items: center; /* Vertikal center */
-
     }
 
     .navbar-nav {
@@ -207,7 +257,9 @@
         border-radius: 10px;
         border: 2px solid white;
         text-decoration: none;
-        transition: background-color 0.3s ease, border-color 0.3s ease;
+        transition:
+            background-color 0.3s ease,
+            border-color 0.3s ease;
     }
 
     .nav-link.btn:hover {
@@ -215,19 +267,16 @@
         border-color: #ffffff;
     }
 
-    
     /* Responsive styling */
     @media (max-width: 768px) {
         .navbar-collapse {
             padding-top: 5px;
             padding-bottom: 20px;
         }
-        .navbar-brand .logos{
+        .navbar-brand .logos {
             font-size: 15px;
             margin-top: -10px;
-            
         }
-
     }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

@@ -10,17 +10,42 @@ use Illuminate\Validation\Rule;
 class SiswaController extends Controller
 {
     // Menampilkan data siswa
-    public function index()
+    public function index(Request $request)
     {
-        $siswa = Siswa::paginate(10); // Mengambil semua data siswa
+        $nama = $request->input('nama');
+        $nis = $request->input('nis');
+        $status = $request->input('status');
+        $kelas_id = $request->input('kelas_id');
 
-        return view('siswa.index', compact('siswa'));
+        $query = Siswa::query();
+        if ($nama) {
+            $query->where('nama', 'like', "%$nama%");
+        }
+
+        if ($nis) {
+            $query->where('nis', 'like', "%$nis%");
+        }
+
+        if ($status) {
+            $query->where('status', $status);
+        }
+
+        if ($kelas_id) {
+            $query->where('kelas_id', $kelas_id);
+        }
+
+        $siswa = $query->paginate(10);
+
+        $kelas = Kelas::all();
+
+        return view('siswa.index', compact('siswa', 'kelas', 'nama', 'nis', 'status', 'kelas_id'));
     }
 
     // Menampilkan form untuk membuat siswa baru
     public function create()
     {
         $kelas = Kelas::all();
+
         return view('siswa.create', compact('kelas'));
     }
 
@@ -79,6 +104,7 @@ class SiswaController extends Controller
     public function edit(Siswa $siswa)
     {
         $kelas = Kelas::all();
+
         return view('siswa.edit', compact('siswa', 'kelas'));
     }
 

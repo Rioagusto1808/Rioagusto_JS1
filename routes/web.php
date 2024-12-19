@@ -26,7 +26,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisiMisiController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', [LandingPageController::class, 'index'])->name('landingpages.index');
 Route::get('/full-berita', [BeritaController::class, 'BeritaAllLandingPages'])->name('berita_all.index');
 Route::get('/berita_id/{id}', [BeritaController::class, 'BeritaAllLandingPagesId'])->name('berita_id.show');
@@ -44,13 +43,7 @@ Route::get('/data-siswa', [DataSiswaController::class, 'index'])->name('DataSisw
 Route::get('/data-guru', [DataGuruController::class, 'index'])->name('DataGuru');
 Route::get('/layanan-informasi', [LayananInformasiController::class, 'index'])->name('LayananInformasi');
 
-
-
-
-
 Route::get('/images/{id}', [ShowImageController::class, 'show'])->name('image.show');
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -77,7 +70,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/berita/{berita}', [BeritaController::class, 'destroy'])->name('berita.destroy');
 
     // Menampilkan Gambar
-   
 
 });
 

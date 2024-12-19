@@ -14,22 +14,21 @@ class DataSiswaController extends Controller
         $search = $request->input('search');
         $kelas = $request->input('kelas_id');
         $berita = Berita::where('status', 'published')
-        ->with('file')
+            ->with('file')
             ->inRandomOrder()
             ->take(4)
             ->get();
 
-            $kelasList = Kelas::all();
-            $siswa = Siswa::when($search, function ($query, $search) {
-                return $query->where('nama', 'like', '%' . $search . '%')
-                    ->orWhere('nis', 'like', '%' . $search . '%');
-            })->
-            when($kelas, function ($query, $kelas) {
-                return $query->where('kelas_id', $kelas);
-            })
-            ->where('status','belum lulus')->paginate(10);
-    
-        return view('landingpages.DataSiswa', compact('berita','siswa','kelasList'));
-    }
+        $kelasList = Kelas::all();
+        $siswa = Siswa::when($search, function ($query, $search) {
+            return $query->where('nama', 'like', '%'.$search.'%')
+                ->orWhere('nis', 'like', '%'.$search.'%');
+        })->
+        when($kelas, function ($query, $kelas) {
+            return $query->where('kelas_id', $kelas);
+        })
+            ->where('status', 'belum lulus')->paginate(10);
 
+        return view('landingpages.DataSiswa', compact('berita', 'siswa', 'kelasList'));
+    }
 }

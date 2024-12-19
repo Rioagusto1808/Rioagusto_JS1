@@ -10,11 +10,24 @@ use Illuminate\Support\Facades\Storage;
 
 class BeritaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $beritas = Berita::latest()->paginate(10);
+        $judul = $request->get('judul');
+        $status = $request->get('status');
 
-        return view('berita.index', compact('beritas'));
+        $query = Berita::query();
+
+        if (! empty($judul)) {
+            $query->where('judul', 'LIKE', "%{$judul}%");
+        }
+
+        if (! empty($status)) {
+            $query->where('status', $status);
+        }
+
+        $beritas = $query->latest()->paginate(10);
+
+        return view('berita.index', compact('beritas', 'judul', 'status'));
     }
 
     public function create()
@@ -66,7 +79,6 @@ class BeritaController extends Controller
     {
         // Ambil berita berdasarkan id
         $berita = Berita::with('user')->findOrFail($id);
-
 
         // Tampilkan view dengan data berita
         return view('berita.show', compact('berita'));
@@ -147,16 +159,14 @@ class BeritaController extends Controller
         return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus.');
     }
 
-
-
     public function BeritaAllLandingPages(Request $request)
     {
         $search = $request->input('search');
-        $berita = Berita::
-        when($search, function ($query, $search) {
-            return $query->where('judul', 'like', '%' . $search . '%');
+        $berita = Berita::when($search, function ($query, $search) {
+            return $query->where('judul', 'like', '%'.$search.'%');
         })->
         where('status', 'published')->latest()->paginate(16);
+
         return view('landingpages.fullBerita', compact('berita'));
 
     }
@@ -164,17 +174,19 @@ class BeritaController extends Controller
     public function GaleriAllLandingPages()
     {
         $galeri = Berita::inRandomOrder()->where('status', 'published')->latest()->paginate(16);
+
         return view('landingpages.fullGaleri', compact('galeri'));
 
     }
 
-    public function BeritaAllLandingPagesId($id){
-        $berita = Berita::with('user','file')->findOrFail($id);
+    public function BeritaAllLandingPagesId($id)
+    {
+        $berita = Berita::with('user', 'file')->findOrFail($id);
         $beritas = Berita::where('status', 'published')
             ->inRandomOrder()
             ->take(4)
             ->get();
 
-        return view('landingpages.fullBeritaId', compact('berita','beritas'));
+        return view('landingpages.fullBeritaId', compact('berita', 'beritas'));
     }
 }

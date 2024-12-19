@@ -8,11 +8,24 @@ use Illuminate\Validation\Rule;
 
 class MataPelajaranController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $mataPelajaran = MataPelajaran::latest()->paginate(10);
+        $nama_mapel = $request->get('nama_mapel');
+        $kode_mapel = $request->get('kode_mapel');
 
-        return view('mata_pelajaran.index', compact('mataPelajaran'));
+        $query = MataPelajaran::query();
+
+        if (! empty($nama_mapel)) {
+            $query->where('nama_mapel', 'LIKE', "%{$nama_mapel}%");
+        }
+
+        if (! empty($kode_mapel)) {
+            $query->where('kode_mapel', $kode_mapel);
+        }
+
+        $mataPelajaran = $query->latest()->paginate(10);
+
+        return view('mata_pelajaran.index', compact('mataPelajaran', 'nama_mapel', 'kode_mapel'));
     }
 
     public function create()

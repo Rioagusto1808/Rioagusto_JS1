@@ -11,17 +11,45 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    // Index: Menampilkan daftar pengguna
-    public function index()
+    public function index(Request $request)
     {
         if (! Auth::user()->hasRole('Superadmin')) {
             Auth::logout();
 
-            return redirect('/login')->withErrors(['error' => 'Akses di tolak, anda tidak memiliki izin !']);
+            return redirect('/login')->withErrors(['error' => 'Akses di tolak, anda tidak memiliki izin!']);
         }
-        $users = User::with('guru', 'roles')->paginate(10); // Mendapatkan semua pengguna beserta guru yang terhubung
 
-        return view('users.index', compact('users'));
+        // Ambil filter dari request
+        $nama = $request->get('nama');
+        $email = $request->get('email');
+        $status = $request->get('status');
+        $guru_id = $request->get('guru_id');
+
+        // Query awal
+        $query = User::with('guru', 'roles');
+
+        // Tambahkan kondisi pencarian
+        if (! empty($nama)) {
+            $query->where('name', 'LIKE', "%{$nama}%");
+        }
+
+        if (! empty($email)) {
+            $query->where('email', 'LIKE', "%{$email}%");
+        }
+
+        if (! empty($status)) {
+            $query->where('status', $status);
+        }
+
+        if (! empty($guru_id)) {
+            $query->where('guru_id', $guru_id);
+        }
+
+        $users = $query->paginate(10);
+
+        $gurus = Guru::all();
+
+        return view('users.index', compact('users', 'gurus', 'nama', 'email', 'status', 'guru_id'));
     }
 
     // Create: Menampilkan form untuk membuat pengguna baru

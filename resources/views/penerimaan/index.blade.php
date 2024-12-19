@@ -1,13 +1,77 @@
 <x-app-layout>
     <div class="container mb-4">
         <h1>Penerimaan Siswa Baru</h1>
-        <a
-            href="{{ route("penerimaan.create") }}"
-            class="btn btn-success mb-4 shadow-sm"
-        >
-            <i class="bi bi-person-plus"></i>
-            Tambah Siswa Baru
-        </a>
+        <div class="d-flex justify-content-between mb-4">
+            <!-- "Tambah Siswa" Button -->
+            <a
+                href="{{ route("penerimaan.create") }}"
+                class="btn btn-success shadow-sm"
+            >
+                <i class="bi bi-person-plus"></i>
+                Tambah Penerimaan
+            </a>
+
+            <!-- Search Form -->
+            <form
+                method="GET"
+                action="{{ route("penerimaan.index") }}"
+                class="d-flex flex-wrap gap-3"
+            >
+                <div class="form-group mb-0">
+                    <input
+                        type="text"
+                        id="nama"
+                        name="nama"
+                        class="form-control"
+                        value="{{ old("nama", $nama) }}"
+                        placeholder="Cari berdasarkan nama"
+                    />
+                </div>
+                <div class="form-group mb-0">
+                    <input
+                        type="text"
+                        id="nisn"
+                        name="nisn"
+                        class="form-control"
+                        value="{{ old("nisn", $nisn) }}"
+                        placeholder="Cari berdasarkan nis"
+                    />
+                </div>
+                <div class="form-group mb-0">
+                    <div class="dropdown">
+                        <select
+                            name="status"
+                            id="status"
+                            class="form-select"
+                            aria-label="Pilih Status"
+                        >
+                            <option value="">Pilih Status</option>
+                            <option
+                                value="diterima"
+                                {{ old("status", $status) == "diterima" ? "selected" : "" }}
+                            >
+                                Diterima
+                            </option>
+                            <option
+                                value="menunggu"
+                                {{ old("status", $status) == "menunggu" ? "selected" : "" }}
+                            >
+                                Menunggu
+                            </option>
+                            <option
+                                value="ditolak"
+                                {{ old("status", $status) == "ditolak" ? "selected" : "" }}
+                            >
+                                Ditolak
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+        </div>
 
         <div class="table-responsive">
             <table
@@ -79,6 +143,14 @@
                             </td>
                         </tr>
                     @endforeach
+
+                    @if ($siswa->isEmpty())
+                        <tr>
+                            <td colspan="11" class="text-center">
+                                Data Tidak Ditemukan
+                            </td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

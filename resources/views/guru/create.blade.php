@@ -76,16 +76,14 @@
                 @enderror
             </div>
             <div class="mb-3">
-            <label for="mapel_id" class="form-label">
-                        Mata Pelajaran
-                    </label>
-                    <select name="mapel_id" class="form-control">
-                        @foreach ($mapel as $matapelajaran)
-                            <option value="{{ $matapelajaran->id }}">
-                                {{ $matapelajaran->nama_mapel }}
-                            </option>
-                        @endforeach
-                    </select>
+                <label for="mapel_id" class="form-label">Mata Pelajaran</label>
+                <select name="mapel_id" class="form-control">
+                    @foreach ($mapel as $matapelajaran)
+                        <option value="{{ $matapelajaran->id }}">
+                            {{ $matapelajaran->nama_mapel }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
             <button type="submit" class="btn btn-success">Save</button>
         </form>

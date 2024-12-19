@@ -109,12 +109,12 @@
             <div class="mb-3">
                 <label for="kelas_id" class="form-label">Kelas</label>
                 <select name="kelas_id" class="form-control">
-                        @foreach ($kelas as $kelasItem)
-                            <option value="{{ $kelasItem->id }}">
-                                {{ $kelasItem->tingkat }}
-                            </option>
-                        @endforeach
-                    </select>
+                    @foreach ($kelas as $kelasItem)
+                        <option value="{{ $kelasItem->id }}">
+                            {{ $kelasItem->tingkat }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mb-3">

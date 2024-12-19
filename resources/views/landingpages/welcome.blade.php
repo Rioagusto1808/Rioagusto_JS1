@@ -7,25 +7,24 @@
         <!-- Include Bootstrap CSS -->
     </head>
     <body>
-    <audio id="background-audio" autoplay loop muted>
-    <source src="{{ asset('videos/backsound.mp3') }}" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
+        <audio id="background-audio" autoplay loop muted>
+            <source
+                src="{{ asset('videos/backsound.mp3') }}"
+                type="audio/mpeg"
+            />
+            Your browser does not support the audio element.
+        </audio>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const audio = document.getElementById('background-audio');
-        // Unmute audio setelah autoplay dimulai
-        audio.muted = false;
-        audio.play().catch(error => {
-            console.error('Autoplay gagal:', error);
-        });
-    });
-</script>
-
-
-
-
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const audio = document.getElementById('background-audio');
+                // Unmute audio setelah autoplay dimulai
+                audio.muted = false;
+                audio.play().catch((error) => {
+                    console.error('Autoplay gagal:', error);
+                });
+            });
+        </script>
 
         @extends('landingpages.layouts')
         @section('content')
@@ -77,14 +76,14 @@
 
                 <!-- Shared Text for All Slides -->
                 <div class="carousel-caption animated-text">
-    <h3 id="caption-title">
-        Selamat Datang di Sistem Informasi Akademik
-    </h3>
-    <p id="caption-description">
-        SD Negeri Peraduan Waras - Bersama Mewujudkan Generasi Cemerlang
-    </p>
-</div>
-
+                    <h3 id="caption-title">
+                        Selamat Datang di Sistem Informasi Akademik
+                    </h3>
+                    <p id="caption-description">
+                        SD Negeri Peraduan Waras - Bersama Mewujudkan Generasi
+                        Cemerlang
+                    </p>
+                </div>
 
                 <!-- Left and right controls -->
                 <a
@@ -118,7 +117,10 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <h2 class="fw-bold" style="font-size: 50px; color:rgb(0, 92, 224);">
+                        <h2
+                            class="fw-bold"
+                            style="font-size: 50px; color: rgb(0, 92, 224)"
+                        >
                             SAMBUTAN KEPALA SEKOLAH
                         </h2>
                         <p style="font-size: 15px">
@@ -208,19 +210,25 @@
             <div class="container gallery-section">
                 <h2 style="font-size: 35px">Galeri Foto</h2>
                 <div class="row g-4">
-                @foreach($galeri as $berita)
-    <div class="col-md-3 col-6 gx-3">
-        <a href="{{ route('image.show', $berita->file->id) }}">
-        <img
-            src="{{ route('image.show', $berita->file->id) }}"
-            alt="Foto 1"
-            class="img-fluid gallery-img"
-            style="width: 300px; height: 250px; object-fit: cover; border-radius:5px;"
-        />
-        </a>
-    </div>
-@endforeach
-
+                    @foreach ($galeri as $berita)
+                        <div class="col-md-3 col-6 gx-3">
+                            <a
+                                href="{{ route('image.show', $berita->file->id) }}"
+                            >
+                                <img
+                                    src="{{ route('image.show', $berita->file->id) }}"
+                                    alt="Foto 1"
+                                    class="img-fluid gallery-img"
+                                    style="
+                                        width: 300px;
+                                        height: 250px;
+                                        object-fit: cover;
+                                        border-radius: 5px;
+                                    "
+                                />
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
                 <a
                     href="/full-galeri"
@@ -231,37 +239,43 @@
             </div>
 
             <div class="container news-section px-3">
-    <h2 class="text-center mb-4" style="font-size: 35px;">Berita Terbaru</h2>
-    <div class="row g-4 gx-3">
-        <!-- Iterasi Berita -->
-        @foreach($beritaTerbaru as $berita)
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <div class="card news-card h-100 shadow-sm">
-                <!-- Gambar -->
-                <img
-                    src="{{ route('image.show', $berita->file->id) }}"
-                    alt="{{ $berita->judul }}"
-                    class="card-img-top news-img"
-                    style="object-fit: cover; height: 200px;"
-                />
-                <!-- Konten -->
-                <div class="card-body d-flex flex-column">
-                    <h5 class="news-title text-truncate">{{ $berita->judul }}</h5>
-                    <p class="news-content text-truncate">
-                        {{ Str::limit($berita->content, 100) }}
-                    </p>
-                    <div class="mt-auto">
-                        <a href="{{ route("berita_id.show", $berita) }}" class="btn btn-primary btn-sm btn-read-more w-100">
-                            Baca Selengkapnya
-                        </a>
-                    </div>
+                <h2 class="text-center mb-4" style="font-size: 35px">
+                    Berita Terbaru
+                </h2>
+                <div class="row g-4 gx-3">
+                    <!-- Iterasi Berita -->
+                    @foreach ($beritaTerbaru as $berita)
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                            <div class="card news-card h-100 shadow-sm">
+                                <!-- Gambar -->
+                                <img
+                                    src="{{ route('image.show', $berita->file->id) }}"
+                                    alt="{{ $berita->judul }}"
+                                    class="card-img-top news-img"
+                                    style="object-fit: cover; height: 200px"
+                                />
+                                <!-- Konten -->
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="news-title text-truncate">
+                                        {{ $berita->judul }}
+                                    </h5>
+                                    <p class="news-content text-truncate">
+                                        {{ Str::limit($berita->content, 100) }}
+                                    </p>
+                                    <div class="mt-auto">
+                                        <a
+                                            href="{{ route('berita_id.show', $berita) }}"
+                                            class="btn btn-primary btn-sm btn-read-more w-100"
+                                        >
+                                            Baca Selengkapnya
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
-        </div>
-        @endforeach
-    </div>
-</div>
-
 
             <!-- Custom CSS -->
             <style>
@@ -481,22 +495,22 @@
                     animation: fadeInText 2s ease-in-out forwards; /* Animasi fade-in saat slide pertama aktif */
                 }
                 #caption-title {
-        font-size: 40px; /* Ukuran default untuk desktop */
-    }
+                    font-size: 40px; /* Ukuran default untuk desktop */
+                }
 
-    #caption-description {
-        font-size: 20px; /* Ukuran default untuk desktop */
-    }
+                #caption-description {
+                    font-size: 20px; /* Ukuran default untuk desktop */
+                }
 
-    @media (max-width: 576px) {
-        #caption-title {
-            font-size: 15px;
-        }
+                @media (max-width: 576px) {
+                    #caption-title {
+                        font-size: 15px;
+                    }
 
-        #caption-description {
-            font-size: 8px; /* Ukuran lebih kecil untuk layar mobile */
-        }
-    }
+                    #caption-description {
+                        font-size: 8px; /* Ukuran lebih kecil untuk layar mobile */
+                    }
+                }
             </style>
             <script>
                 $(document).ready(function () {

@@ -9,18 +9,43 @@ use Illuminate\Validation\Rule;
 
 class GuruController extends Controller
 {
-    // Show all Guru
-    public function index()
+    public function index(Request $request)
     {
-        $gurus = Guru::paginate(10);
+        // Ambil filter dari request
+        $nama = $request->get('nama');
+        $nip = $request->get('nip');
+        $mapel_id = $request->get('mapel_id');
 
-        return view('guru.index', compact('gurus'));
+        // Query awal
+        $query = Guru::query();
+
+        // Tambahkan kondisi pencarian
+        if (! empty($nama)) {
+            $query->where('nama', 'LIKE', "%{$nama}%");
+        }
+
+        if (! empty($nip)) {
+            $query->where('nip', 'LIKE', "%{$nip}%");
+        }
+
+        if (! empty($mapel_id)) {
+            $query->where('mapel_id', $mapel_id);
+        }
+
+        // Paginate hasil query
+        $gurus = $query->paginate(10);
+
+        // Dapatkan daftar mapel untuk dropdown
+        $mapels = MataPelajaran::all();
+
+        return view('guru.index', compact('gurus', 'mapels', 'nama', 'nip', 'mapel_id'));
     }
 
     // Show the form to create a new Guru
     public function create()
     {
         $mapel = MataPelajaran::all();
+
         return view('guru.create', compact('mapel'));
     }
 
@@ -68,7 +93,8 @@ class GuruController extends Controller
     public function edit(Guru $guru)
     {
         $mapel = MataPelajaran::all();
-        return view('guru.edit', compact('guru','mapel'));
+
+        return view('guru.edit', compact('guru', 'mapel'));
     }
 
     // Update an existing Guru in the database
@@ -85,7 +111,7 @@ class GuruController extends Controller
             'tempat_lahir' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string',
-           'mapel_id' => 'required|exists:mata_pelajaran,id',
+            'mapel_id' => 'required|exists:mata_pelajaran,id',
         ], [
             'nama.required' => 'Nama wajib diisi.',
             'nama.string' => 'Nama harus berupa teks.',

@@ -10,11 +10,25 @@ use Illuminate\Http\Request;
 
 class JadwalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $jadwals = Jadwal::with('details.kelas', 'details.guru', 'details.mataPelajaran')->paginate(10);
+        $nama_jadwal = $request->get('nama_jadwal');
+        $kelas_id = $request->get('kelas_id');
 
-        return view('jadwal.index', compact('jadwals'));
+        $kelas = Kelas::all(); // Mendapatkan semua data kelas untuk dropdown
+
+        $jadwals = Jadwal::with('details.kelas', 'details.guru', 'details.mataPelajaran')
+            ->when($nama_jadwal, function ($query, $nama_jadwal) {
+                $query->where('nama_jadwal', 'like', "%{$nama_jadwal}%");
+            })
+            ->when($kelas_id, function ($query, $kelas_id) {
+                $query->whereHas('details.kelas', function ($query) use ($kelas_id) {
+                    $query->where('id', $kelas_id);
+                });
+            })
+            ->paginate(10);
+
+        return view('jadwal.index', compact('jadwals', 'kelas', 'nama_jadwal', 'kelas_id'));
     }
 
     public function create()
@@ -70,7 +84,7 @@ class JadwalController extends Controller
             'details.*.mapel_id.exists' => 'Mata pelajaran yang dipilih tidak valid.',
         ]);
 
-        $jadwal = Jadwal::create($request->only('nama_jadwal','kelas_id', 'periode_mulai', 'periode_selesai'));
+        $jadwal = Jadwal::create($request->only('nama_jadwal', 'kelas_id', 'periode_mulai', 'periode_selesai'));
 
         foreach ($request->details as $detail) {
             $jadwal->details()->create($detail);

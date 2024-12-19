@@ -2,13 +2,97 @@
     <div class="container mb-4">
         <h1 class="mb-4">Tabel User</h1>
 
-        <a
-            href="{{ route("users.create") }}"
-            class="btn btn-success mb-4 shadow-sm"
-        >
-            <i class="bi bi-person-plus"></i>
-            Tambah User
-        </a>
+        <div class="d-flex justify-content-between mb-4">
+            <!-- "Tambah Siswa" Button -->
+            <a
+                href="{{ route("users.create") }}"
+                class="btn btn-success shadow-sm"
+            >
+                <i class="bi bi-person-plus"></i>
+                Tambah User
+            </a>
+
+            <!-- Search Form -->
+            <form
+                method="GET"
+                action="{{ route("users.index") }}"
+                class="d-flex flex-wrap gap-3"
+            >
+                <div class="form-group mb-0">
+                    <input
+                        type="text"
+                        id="nama"
+                        name="nama"
+                        class="form-control"
+                        value="{{ old("nama", $nama) }}"
+                        placeholder="Cari berdasarkan nama"
+                    />
+                </div>
+                <div class="form-group mb-0">
+                    <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        class="form-control"
+                        value="{{ old("email", $email) }}"
+                        placeholder="Cari berdasarkan email"
+                    />
+                </div>
+                <div class="form-group mb-0">
+                    <div class="dropdown">
+                        <select
+                            name="status"
+                            id="status"
+                            class="form-select"
+                            aria-label="Pilih Status"
+                        >
+                            <option value="">Pilih Status</option>
+                            <option
+                                value="active"
+                                {{ old("status", $status) == "active" ? "selected" : "" }}
+                            >
+                                Active
+                            </option>
+                            <option
+                                value="inactive"
+                                {{ old("status", $status) == "inactive" ? "selected" : "" }}
+                            >
+                                Inactive
+                            </option>
+                            <option
+                                value="banned"
+                                {{ old("status", $status) == "banned" ? "selected" : "" }}
+                            >
+                                Banned
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group mb-0">
+                    <div class="dropdown">
+                        <select
+                            name="guru_id"
+                            id="guru_id"
+                            class="form-select"
+                            aria-label="Pilih Kelas"
+                        >
+                            <option value="">Pilih Kelas</option>
+                            @foreach ($gurus as $k)
+                                <option
+                                    value="{{ $k->id }}"
+                                    {{ old("guru_id", $guru_id) == $k->id ? "selected" : "" }}
+                                >
+                                    {{ $k->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+        </div>
 
         <div class="table-responsive">
             <table
@@ -61,25 +145,17 @@
                                 >
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <form
-                                    id="delete-form-{{ $user->id }}"
-                                    action="{{ route("users.destroy", $user) }}"
-                                    method="POST"
-                                    style="display: inline"
-                                >
-                                    @csrf
-                                    @method("DELETE")
-                                    <button
-                                        type="button"
-                                        class="btn btn-danger btn-sm shadow-sm"
-                                        onclick="confirmDelete('{{ $user->id }}')"
-                                    >
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
                             </td>
                         </tr>
                     @endforeach
+
+                    @if ($users->isEmpty())
+                        <tr>
+                            <td colspan="11" class="text-center">
+                                Data Tidak Ditemukan
+                            </td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

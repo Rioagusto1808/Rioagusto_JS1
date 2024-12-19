@@ -2,13 +2,67 @@
     <div class="container mb-4">
         <h1 class="mb-4">Daftar Berita</h1>
 
-        <a
-            href="{{ route("berita.create") }}"
-            class="btn btn-success mb-4 shadow-sm"
-        >
-            <i class="bi bi-person-plus"></i>
-            Tambah Berita
-        </a>
+        <div class="d-flex justify-content-between mb-4">
+            <!-- "Tambah Siswa" Button -->
+            <a
+                href="{{ route("berita.create") }}"
+                class="btn btn-success shadow-sm"
+            >
+                <i class="bi bi-person-plus"></i>
+                Tambah Berita
+            </a>
+
+            <!-- Search Form -->
+            <form
+                method="GET"
+                action="{{ route("berita.index") }}"
+                class="d-flex flex-wrap gap-3"
+            >
+                <div class="form-group mb-0">
+                    <input
+                        type="text"
+                        id="judul"
+                        name="judul"
+                        class="form-control"
+                        value="{{ old("judul", $judul) }}"
+                        placeholder="Cari berdasarkan berita"
+                    />
+                </div>
+                <div class="form-group mb-0">
+                    <div class="dropdown">
+                        <select
+                            name="status"
+                            id="status"
+                            class="form-select"
+                            aria-label="Pilih Status"
+                        >
+                            <option value="">Pilih Status</option>
+                            <option
+                                value="draft"
+                                {{ old("status", $status) == "draft" ? "selected" : "" }}
+                            >
+                                Draft
+                            </option>
+                            <option
+                                value="published"
+                                {{ old("status", $status) == "published" ? "selected" : "" }}
+                            >
+                                Published
+                            </option>
+                            <option
+                                value="archived"
+                                {{ old("status", $status) == "archived" ? "selected" : "" }}
+                            >
+                                Archived
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+        </div>
 
         <div class="table-responsive">
             <table
@@ -27,7 +81,7 @@
                     @foreach ($beritas as $index => $berita)
                         <tr>
                             <td>{{ $beritas->firstItem() + $index }}</td>
-                            <td>{{ $berita->judul }}</td>
+                            <td>{{ Str::limit($berita->judul, 80) }}</td>
                             <td>{{ $berita->user->name }}</td>
                             <td>
                                 <span
@@ -74,6 +128,14 @@
                             </td>
                         </tr>
                     @endforeach
+
+                    @if ($beritas->isEmpty())
+                        <tr>
+                            <td colspan="11" class="text-center">
+                                Data Tidak Ditemukan
+                            </td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

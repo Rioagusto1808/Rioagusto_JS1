@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
-use Illuminate\Http\Request;
 
 class HubungiKamiController extends Controller
 {
@@ -11,12 +10,11 @@ class HubungiKamiController extends Controller
     {
         // Ambil 4 item acak untuk galeri
         $berita = Berita::where('status', 'published')
-        ->with('file')
+            ->with('file')
             ->inRandomOrder()
             ->take(4)
             ->get();
-    
+
         return view('landingpages.HubungiKami', compact('berita'));
     }
-
 }

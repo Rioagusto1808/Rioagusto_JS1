@@ -7,12 +7,32 @@ use Illuminate\Http\Request;
 
 class PenerimaanSiswaController extends Controller
 {
-    // Menampilkan semua penerimaan siswa baru
-    public function index()
+    public function index(Request $request)
     {
-        $siswa = PenerimaanSiswaBaru::paginate(10);
+        // Ambil nilai filter dari request
+        $nama = $request->get('nama');
+        $nisn = $request->get('nisn');
+        $status = $request->get('status');
 
-        return view('penerimaan.index', compact('siswa'));
+        // Query dasar
+        $query = PenerimaanSiswaBaru::query();
+
+        // Tambahkan kondisi pencarian
+        if (! empty($nama)) {
+            $query->where('nama', 'LIKE', "%{$nama}%");
+        }
+
+        if (! empty($nisn)) {
+            $query->where('nisn', 'LIKE', "%{$nisn}%");
+        }
+
+        if (! empty($status)) {
+            $query->where('status', $status);
+        }
+
+        $siswa = $query->paginate(10);
+
+        return view('penerimaan.index', compact('siswa', 'nama', 'nisn', 'status'));
     }
 
     // Menampilkan form untuk membuat penerimaan siswa baru
