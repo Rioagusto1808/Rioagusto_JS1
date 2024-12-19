@@ -65,15 +65,8 @@ class BeritaController extends Controller
     public function show($id)
     {
         // Ambil berita berdasarkan id
-        $berita = Berita::findOrFail($id);
+        $berita = Berita::with('user')->findOrFail($id);
 
-        // Pastikan relasi user dimuat
-        $berita->load('user');
-
-        // Cek apakah user ditemukan
-        if (! $berita->user) {
-            return redirect()->route('berita.index')->with('error', 'Penulis berita tidak ditemukan.');
-        }
 
         // Tampilkan view dengan data berita
         return view('berita.show', compact('berita'));
@@ -152,5 +145,36 @@ class BeritaController extends Controller
         $berita->delete();
 
         return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus.');
+    }
+
+
+
+    public function BeritaAllLandingPages(Request $request)
+    {
+        $search = $request->input('search');
+        $berita = Berita::
+        when($search, function ($query, $search) {
+            return $query->where('judul', 'like', '%' . $search . '%');
+        })->
+        where('status', 'published')->latest()->paginate(16);
+        return view('landingpages.fullBerita', compact('berita'));
+
+    }
+
+    public function GaleriAllLandingPages()
+    {
+        $galeri = Berita::inRandomOrder()->where('status', 'published')->latest()->paginate(16);
+        return view('landingpages.fullGaleri', compact('galeri'));
+
+    }
+
+    public function BeritaAllLandingPagesId($id){
+        $berita = Berita::with('user','file')->findOrFail($id);
+        $beritas = Berita::where('status', 'published')
+            ->inRandomOrder()
+            ->take(4)
+            ->get();
+
+        return view('landingpages.fullBeritaId', compact('berita','beritas'));
     }
 }

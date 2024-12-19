@@ -107,17 +107,14 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="kelas" class="form-label">Kelas</label>
-                <input
-                    type="text"
-                    name="kelas"
-                    id="tahun_lulus"
-                    class="form-control"
-                    value="{{ old('kelas') }}"
-                />
-                @error('kelas')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
+                <label for="kelas_id" class="form-label">Kelas</label>
+                <select name="kelas_id" class="form-control">
+                        @foreach ($kelas as $kelasItem)
+                            <option value="{{ $kelasItem->id }}">
+                                {{ $kelasItem->tingkat }}
+                            </option>
+                        @endforeach
+                    </select>
             </div>
 
             <div class="mb-3">

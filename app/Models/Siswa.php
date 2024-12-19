@@ -21,6 +21,11 @@ class Siswa extends Model
         'tahun_masuk',
         'tahun_lulus',
         'status',
-        'kelas',
+        'kelas_id',
     ];
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
 }

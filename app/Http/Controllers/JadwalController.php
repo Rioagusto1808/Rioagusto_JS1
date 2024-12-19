@@ -30,6 +30,7 @@ class JadwalController extends Controller
     {
         $request->validate([
             'nama_jadwal' => 'required|string|max:255',
+            'kelas_id' => 'required|exists:kelas,id',
             'periode_mulai' => 'nullable|date',
             'periode_selesai' => 'nullable|date',
             'details.*.hari' => 'required|string',
@@ -42,6 +43,9 @@ class JadwalController extends Controller
             'nama_jadwal.required' => 'Nama jadwal wajib diisi.',
             'nama_jadwal.string' => 'Nama jadwal harus berupa teks.',
             'nama_jadwal.max' => 'Nama jadwal tidak boleh lebih dari 255 karakter.',
+
+            'kelas_id.required' => 'Kelas wajib dipilih untuk setiap detail jadwal.',
+            'kelas_id.exists' => 'Kelas yang dipilih tidak valid.',
 
             'periode_mulai.date' => 'Periode mulai harus berupa tanggal yang valid.',
             'periode_selesai.date' => 'Periode selesai harus berupa tanggal yang valid.',
@@ -66,7 +70,7 @@ class JadwalController extends Controller
             'details.*.mapel_id.exists' => 'Mata pelajaran yang dipilih tidak valid.',
         ]);
 
-        $jadwal = Jadwal::create($request->only('nama_jadwal', 'periode_mulai', 'periode_selesai'));
+        $jadwal = Jadwal::create($request->only('nama_jadwal','kelas_id', 'periode_mulai', 'periode_selesai'));
 
         foreach ($request->details as $detail) {
             $jadwal->details()->create($detail);
@@ -98,6 +102,7 @@ class JadwalController extends Controller
     {
         $request->validate([
             'nama_jadwal' => 'required|string|max:255',
+            'kelas_id' => 'required|exists:kelas,id',
             'periode_mulai' => 'nullable|date',
             'periode_selesai' => 'nullable|date',
             'details.*.hari' => 'required|string',
@@ -110,6 +115,9 @@ class JadwalController extends Controller
             'nama_jadwal.required' => 'Nama jadwal wajib diisi.',
             'nama_jadwal.string' => 'Nama jadwal harus berupa teks.',
             'nama_jadwal.max' => 'Nama jadwal tidak boleh lebih dari 255 karakter.',
+
+            'kelas_id.required' => 'Kelas wajib dipilih untuk setiap detail jadwal.',
+            'kelas_id.exists' => 'Kelas yang dipilih tidak valid.',
 
             'periode_mulai.date' => 'Periode mulai harus berupa tanggal yang valid.',
             'periode_selesai.date' => 'Periode selesai harus berupa tanggal yang valid.',
@@ -134,7 +142,7 @@ class JadwalController extends Controller
             'details.*.mapel_id.exists' => 'Mata pelajaran yang dipilih tidak valid.',
         ]);
 
-        $jadwal->update($request->only('nama_jadwal', 'periode_mulai', 'periode_selesai'));
+        $jadwal->update($request->only('nama_jadwal', 'kelas_id', 'periode_mulai', 'periode_selesai'));
 
         $jadwal->details()->delete();
         foreach ($request->details as $detail) {

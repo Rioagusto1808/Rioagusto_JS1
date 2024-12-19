@@ -4,6 +4,8 @@
 
         <!-- Show Periode Jadwal -->
         <div class="mb-4">
+            <strong>Kelas:</strong>
+            {{ $jadwal->kelas->tingkat }}
             <strong>Periode:</strong>
             {{ \Carbon\Carbon::parse($jadwal->periode_mulai)->format('d M Y') }}
             -

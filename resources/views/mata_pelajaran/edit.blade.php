@@ -1,10 +1,9 @@
 <x-app-layout>
     <div class="container">
-        <h1>Edit Mata Pelajaran</h1>
-        <x-message></x-message>
+        <h1 class="mb-4">Edit Mata Pelajaran</h1>
         <form
             action="{{ route('mata_pelajaran.update', $mataPelajaran->id) }}"
-            method="POST"
+            method="POST" class="shadow-lg p-4 rounded-3 bg-light"
         >
             @csrf
             @method('PUT')

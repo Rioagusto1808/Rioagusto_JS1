@@ -26,18 +26,18 @@
         {{-- Pagination for Larger Screens --}}
         <div class="d-none d-sm-flex justify-content-between w-100 align-items-center">
             <div>
-                <p class="text-muted">
-                    {!! __('Showing') !!}
+                <p class="text-muted me-3 mt-3">
+                    {!! __('Menampilkan') !!}
                     @if ($paginator->firstItem())
                         <span class="fw-bold">{{ $paginator->firstItem() }}</span>
-                        {!! __('to') !!}
+                        {!! __('sampai') !!}
                         <span class="fw-bold">{{ $paginator->lastItem() }}</span>
                     @else
                         {{ $paginator->count() }}
                     @endif
-                    {!! __('of') !!}
+                    {!! __('dari') !!}
                     <span class="fw-bold">{{ $paginator->total() }}</span>
-                    {!! __('results') !!}
+                    {!! __('hasil') !!} 
                 </p>
             </div>
 

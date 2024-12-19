@@ -10,7 +10,7 @@ class MataPelajaranController extends Controller
 {
     public function index()
     {
-        $mataPelajaran = MataPelajaran::all();
+        $mataPelajaran = MataPelajaran::latest()->paginate(10);
 
         return view('mata_pelajaran.index', compact('mataPelajaran'));
     }

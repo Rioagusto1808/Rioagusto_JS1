@@ -12,7 +12,9 @@
         <link
             href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap"
             rel="stylesheet"
-        />
+        />        <!-- Include Bootstrap CSS -->
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -26,6 +28,10 @@
             @include('landingpages.components.Footer')
         </div>
     </body>
+                <!-- Include Bootstrap JS and jQuery -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         .min-h-screen {
             position: relative;

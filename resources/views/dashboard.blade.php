@@ -29,7 +29,7 @@
                     <div class="card-body text-center">
                         <i class="bi bi-person-badge display-3 mb-3"></i>
                         <h5 class="card-title">Total Admin</h5>
-                        <p class="fs-1 fw-bold">10</p>
+                        <p class="fs-1 fw-bold">{{ $userscount }}</p>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     <div class="card-body text-center">
                         <i class="bi bi-person-workspace display-3 mb-3"></i>
                         <h5 class="card-title">Total Guru</h5>
-                        <p class="fs-1 fw-bold">25</p>
+                        <p class="fs-1 fw-bold">{{ $guruscount }}</p>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                     <div class="card-body text-center">
                         <i class="bi bi-people display-3 mb-3"></i>
                         <h5 class="card-title">Total Siswa</h5>
-                        <p class="fs-1 fw-bold">200</p>
+                        <p class="fs-1 fw-bold">{{ $siswascount }}</p>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                     <div class="card-body text-center">
                         <i class="bi bi-easel display-3 mb-3"></i>
                         <h5 class="card-title">Total Kelas</h5>
-                        <p class="fs-1 fw-bold">15</p>
+                        <p class="fs-1 fw-bold">{{ $classcount }}</p>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                     <div class="card-body text-center">
                         <i class="bi bi-mortarboard display-3 mb-3"></i>
                         <h5 class="card-title">Total Alumni</h5>
-                        <p class="fs-1 fw-bold">300</p>
+                        <p class="fs-1 fw-bold">{{ $alumnicount }}</p>
                     </div>
                 </div>
             </div>

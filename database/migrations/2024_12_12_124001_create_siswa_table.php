@@ -18,7 +18,7 @@ return new class extends Migration
             $table->year('tahun_masuk');
             $table->year('tahun_lulus')->nullable();
             $table->enum('status', ['lulus', 'belum lulus']);
-            $table->string('kelas');
+            $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
             $table->timestamps();
         });
     }

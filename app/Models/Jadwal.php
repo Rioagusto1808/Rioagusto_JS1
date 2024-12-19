@@ -13,6 +13,7 @@ class Jadwal extends Model
 
     protected $fillable = [
         'nama_jadwal',
+        'kelas_id',
         'periode_mulai',
         'periode_selesai',
     ];
@@ -20,5 +21,9 @@ class Jadwal extends Model
     public function details()
     {
         return $this->hasMany(DetailJadwal::class, 'jadwal_id');
+    }
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 }

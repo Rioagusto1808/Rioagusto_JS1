@@ -39,7 +39,7 @@
                             <td>{{ $item->alamat }}</td>
                             <td>{{ $item->tahun_masuk }}</td>
                             <td>{{ $item->tahun_lulus ?? "-" }}</td>
-                            <td>{{ $item->kelas }}</td>
+                            <td>{{ $item->kelas->tingkat }}</td>
                             <td>
                                 <span
                                     class="badge @if ($item->status == "lulus")

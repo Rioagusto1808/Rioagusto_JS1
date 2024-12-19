@@ -18,16 +18,11 @@ class KelasSeeder extends Seeder
         DB::table('kelas')->insert([
             ['tingkat' => '1A'],
             ['tingkat' => '1B'],
-            ['tingkat' => '2A'],
-            ['tingkat' => '2B'],
-            ['tingkat' => '3A'],
-            ['tingkat' => '3B'],
-            ['tingkat' => '4A'],
-            ['tingkat' => '4B'],
-            ['tingkat' => '5A'],
-            ['tingkat' => '5B'],
-            ['tingkat' => '6A'],
-            ['tingkat' => '6B'],
+            ['tingkat' => '2'],
+            ['tingkat' => '3'],
+            ['tingkat' => '4'],
+            ['tingkat' => '5'],
+            ['tingkat' => '6'],
         ]);
     }
 }

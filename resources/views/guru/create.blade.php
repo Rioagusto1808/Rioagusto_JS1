@@ -76,19 +76,16 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="mata_pelajaran" class="form-label">
-                    Mata Pelajaran
-                </label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="mata_pelajaran"
-                    name="mata_pelajaran"
-                    value="{{ old('mata_pelajaran') }}"
-                />
-                @error('mata_pelajaran')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
+            <label for="mapel_id" class="form-label">
+                        Mata Pelajaran
+                    </label>
+                    <select name="mapel_id" class="form-control">
+                        @foreach ($mapel as $matapelajaran)
+                            <option value="{{ $matapelajaran->id }}">
+                                {{ $matapelajaran->nama_mapel }}
+                            </option>
+                        @endforeach
+                    </select>
             </div>
             <button type="submit" class="btn btn-success">Save</button>
         </form>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->text('alamat');
-            $table->string('mata_pelajaran');
+            $table->foreignId('mapel_id')->constrained('mata_pelajaran')->onDelete('cascade');
             $table->timestamps();
         });
     }

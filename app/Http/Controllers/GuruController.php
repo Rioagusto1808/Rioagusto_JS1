@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\MataPelajaran;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -19,7 +20,8 @@ class GuruController extends Controller
     // Show the form to create a new Guru
     public function create()
     {
-        return view('guru.create');
+        $mapel = MataPelajaran::all();
+        return view('guru.create', compact('mapel'));
     }
 
     // Store a newly created Guru in the database
@@ -31,7 +33,7 @@ class GuruController extends Controller
             'tempat_lahir' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string',
-            'mata_pelajaran' => 'required|string|max:255',
+            'mapel_id' => 'required|exists:mata_pelajaran,id',
         ], [
             'nama.required' => 'Nama wajib diisi.',
             'nama.string' => 'Nama harus berupa teks.',
@@ -52,9 +54,9 @@ class GuruController extends Controller
             'alamat.required' => 'Alamat wajib diisi.',
             'alamat.string' => 'Alamat harus berupa teks.',
 
-            'mata_pelajaran.required' => 'Mata pelajaran wajib diisi.',
-            'mata_pelajaran.string' => 'Mata pelajaran harus berupa teks.',
-            'mata_pelajaran.max' => 'Mata pelajaran tidak boleh lebih dari 255 karakter.',
+            'mapel_id.required' => 'Mata pelajaran wajib diisi.',
+            'mapel_id.string' => 'Mata pelajaran harus berupa teks.',
+            'mapel_id.max' => 'Mata pelajaran tidak boleh lebih dari 255 karakter.',
         ]);
 
         Guru::create($request->all());
@@ -65,7 +67,8 @@ class GuruController extends Controller
     // Show the form to edit an existing Guru
     public function edit(Guru $guru)
     {
-        return view('guru.edit', compact('guru'));
+        $mapel = MataPelajaran::all();
+        return view('guru.edit', compact('guru','mapel'));
     }
 
     // Update an existing Guru in the database
@@ -82,7 +85,7 @@ class GuruController extends Controller
             'tempat_lahir' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string',
-            'mata_pelajaran' => 'required|string|max:255',
+           'mapel_id' => 'required|exists:mata_pelajaran,id',
         ], [
             'nama.required' => 'Nama wajib diisi.',
             'nama.string' => 'Nama harus berupa teks.',
@@ -103,9 +106,9 @@ class GuruController extends Controller
             'alamat.required' => 'Alamat wajib diisi.',
             'alamat.string' => 'Alamat harus berupa teks.',
 
-            'mata_pelajaran.required' => 'Mata pelajaran wajib diisi.',
-            'mata_pelajaran.string' => 'Mata pelajaran harus berupa teks.',
-            'mata_pelajaran.max' => 'Mata pelajaran tidak boleh lebih dari 255 karakter.',
+            'mapel_id.required' => 'Mata pelajaran wajib diisi.',
+            'mapel_id.string' => 'Mata pelajaran harus berupa teks.',
+            'mapel_id.max' => 'Mata pelajaran tidak boleh lebih dari 255 karakter.',
         ]);
 
         $guru->update($request->all());

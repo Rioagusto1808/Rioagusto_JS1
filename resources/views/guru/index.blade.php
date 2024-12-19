@@ -29,7 +29,7 @@
                             <td>{{ $gurus->firstItem() + $index }}</td>
                             <td>{{ $guru->nama }}</td>
                             <td>{{ $guru->nip }}</td>
-                            <td>{{ $guru->mata_pelajaran }}</td>
+                            <td>{{ $guru->mataPelajaran->nama_mapel }}</td>
                             <td>{{ $guru->alamat }}</td>
                             <td>
                                 <a

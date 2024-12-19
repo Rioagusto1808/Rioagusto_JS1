@@ -44,7 +44,7 @@
                             </td>
                             <td>
                                 <a
-                                    href="{{ route("berita.edit", $berita) }}"
+                                    href="{{ route("berita.show", $berita) }}"
                                     class="btn btn-info btn-sm shadow-sm"
                                 >
                                     <i class="bi bi-eye"></i>

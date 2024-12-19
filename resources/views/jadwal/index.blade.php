@@ -14,6 +14,7 @@
                 <tr>
                     <th>#</th>
                     <th>Nama Jadwal</th>
+                    <th>Kelas</th>
                     <th>Periode</th>
                     <th>Aksi</th>
                 </tr>
@@ -23,6 +24,7 @@
                     <tr>
                         <td>{{ $jadwals->firstItem() + $index }}</td>
                         <td>{{ $jadwal->nama_jadwal }}</td>
+                        <td>{{ $jadwal->kelas->tingkat }}</td>
                         <td>
                             {{ $jadwal->periode_mulai }} -
                             {{ $jadwal->periode_selesai }}

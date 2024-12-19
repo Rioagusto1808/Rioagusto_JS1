@@ -1,8 +1,7 @@
 <x-app-layout>
     <div class="container">
-        <h1>Tambah Mata Pelajaran</h1>
-        <x-message></x-message>
-        <form action="{{ route('mata_pelajaran.store') }}" method="POST">
+        <h1 class="mb-4">Tambah Mata Pelajaran</h1>
+        <form action="{{ route('mata_pelajaran.store') }}" method="POST" class="shadow-lg p-4 rounded-3 bg-light">
             @csrf
             <div class="mb-3">
                 <label for="nama_mapel" class="form-label">

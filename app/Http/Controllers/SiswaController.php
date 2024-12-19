@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -19,7 +20,8 @@ class SiswaController extends Controller
     // Menampilkan form untuk membuat siswa baru
     public function create()
     {
-        return view('siswa.create');
+        $kelas = Kelas::all();
+        return view('siswa.create', compact('kelas'));
     }
 
     // Menyimpan data siswa baru
@@ -33,7 +35,7 @@ class SiswaController extends Controller
             'alamat' => 'required|string',
             'tahun_masuk' => 'required|digits:4',
             'tahun_lulus' => 'nullable|digits:4',
-            'kelas' => 'required|string|max:255',
+            'kelas_id' => 'required|exists:kelas,id',
             'status' => 'required|in:lulus,belum lulus',
         ], [
             'nama.required' => 'Nama wajib diisi.',
@@ -60,9 +62,9 @@ class SiswaController extends Controller
 
             'tahun_lulus.digits' => 'Tahun lulus harus berupa 4 digit angka.',
 
-            'kelas.required' => 'Kelas wajib diisi.',
-            'kelas.string' => 'Kelas harus berupa teks',
-            'kelas.max' => 'Kelas tidak boleh lebih dari 255 karakter.',
+            'kelas_id.required' => 'Kelas wajib diisi.',
+            'kelas_id.string' => 'Kelas harus berupa teks',
+            'kelas_id.max' => 'Kelas tidak boleh lebih dari 255 karakter.',
 
             'status.required' => 'Status wajib diisi.',
             'status.in' => 'Status hanya boleh "lulus" atau "belum lulus".',
@@ -76,7 +78,8 @@ class SiswaController extends Controller
     // Menampilkan form untuk mengedit data siswa
     public function edit(Siswa $siswa)
     {
-        return view('siswa.edit', compact('siswa'));
+        $kelas = Kelas::all();
+        return view('siswa.edit', compact('siswa', 'kelas'));
     }
 
     // Mengupdate data siswa
@@ -95,7 +98,7 @@ class SiswaController extends Controller
             'alamat' => 'required|string',
             'tahun_masuk' => 'required|digits:4',
             'tahun_lulus' => 'nullable|digits:4',
-            'kelas' => 'required|string|max:255',
+            'kelas_id' => 'required|exists:kelas,id',
             'status' => 'required|in:lulus,belum lulus',
         ], [
             'nama.required' => 'Nama wajib diisi.',
@@ -122,9 +125,9 @@ class SiswaController extends Controller
 
             'tahun_lulus.digits' => 'Tahun lulus harus berupa 4 digit angka.',
 
-            'kelas.required' => 'Kelas wajib diisi.',
-            'kelas.string' => 'Kelas harus berupa teks',
-            'kelas.max' => 'Kelas tidak boleh lebih dari 255 karakter.',
+            'kelas_id.required' => 'Kelas wajib diisi.',
+            'kelas_id.string' => 'Kelas harus berupa teks',
+            'kelas_id.max' => 'Kelas tidak boleh lebih dari 255 karakter.',
 
             'status.required' => 'Status wajib diisi.',
             'status.in' => 'Status hanya boleh "lulus" atau "belum lulus".',

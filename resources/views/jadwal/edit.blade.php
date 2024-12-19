@@ -23,6 +23,28 @@
             </div>
 
             <div class="mb-3">
+            <label
+                            for="kelas_id"
+                            class="form-label"
+                        >
+                            Kelas
+                        </label>
+                        <select
+                            name="kelas_id"
+                            class="form-control"
+                        >
+                            @foreach ($kelas as $kelasItem)
+                                <option
+                                    value="{{ $kelasItem->id }}"
+                                    {{ $kelasItem->id == $detail->kelas_id ? 'selected' : '' }}
+                                >
+                                    {{ $kelasItem->tingkat }}
+                                </option>
+                            @endforeach
+                        </select>
+            </div>
+
+            <div class="mb-3">
                 <label for="periode_mulai" class="form-label">
                     Periode Mulai
                 </label>
