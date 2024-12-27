@@ -64,66 +64,76 @@
                 </button>
             </form>
         </div>
-
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nama Jadwal</th>
-                    <th>Kelas</th>
-                    <th>Periode</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($jadwals as $index => $jadwal)
+        <div class="table-responsive">
+            <table
+                class="table table-hover table-bordered table-striped table-sm shadow-sm rounded-3"
+            >
+                <thead class="bg-primary text-white">
                     <tr>
-                        <td>{{ $jadwals->firstItem() + $index }}</td>
-                        <td>{{ $jadwal->nama_jadwal }}</td>
-                        <td>{{ $jadwal->kelas->tingkat }}</td>
-                        <td>
-                            {{ $jadwal->periode_mulai }} -
-                            {{ $jadwal->periode_selesai }}
-                        </td>
-                        <td>
-                            <a
-                                href="{{ route('jadwal.show', $jadwal) }}"
-                                class="btn btn-info btn-sm"
-                            >
-                                <i class="bi bi-eye"></i>
-                            </a>
-                            <a
-                                href="{{ route('jadwal.edit', $jadwal) }}"
-                                class="btn btn-warning btn-sm"
-                            >
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-                            <form
-                                action="{{ route('jadwal.destroy', $jadwal) }}"
-                                method="POST"
-                                style="display: inline-block"
-                            >
-                                @csrf
-                                @method('DELETE')
-                                <button
-                                    type="submit"
-                                    class="btn btn-danger btn-sm"
+                        <th>#</th>
+                        <th>Nama Jadwal</th>
+                        <th>Kelas</th>
+                        <th>Periode</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($jadwals as $index => $jadwal)
+                        <tr>
+                            <td>{{ $jadwals->firstItem() + $index }}</td>
+                            <td>{{ $jadwal->nama_jadwal }}</td>
+                            <td>{{ $jadwal->kelas->tingkat }}</td>
+                            <td>
+                                {{ $jadwal->periode_mulai }} -
+                                {{ $jadwal->periode_selesai }}
+                            </td>
+                            <td>
+                                <a
+                                    href="{{ route('jadwal.show', $jadwal) }}"
+                                    class="btn btn-info btn-sm"
                                 >
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a
+                                    href="{{ route('jadwal.edit', $jadwal) }}"
+                                    class="btn btn-warning btn-sm"
+                                >
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
 
-                @if ($jadwals->isEmpty())
-                    <tr>
-                        <td colspan="11" class="text-center">
-                            Data Tidak Ditemukan
-                        </td>
-                    </tr>
-                @endif
-            </tbody>
-        </table>
+                                <form
+                                    id="delete-form-{{ $jadwal->id }}"
+                                    action="{{ route('jadwal.destroy', $jadwals) }}"
+                                    method="POST"
+                                    style="display: inline"
+                                >
+                                    @csrf
+                                    @method('DELETE')
+                                    <button
+                                        type="button"
+                                        class="btn btn-danger btn-sm shadow-sm"
+                                        onclick="confirmDelete('{{ $jadwal->id }}')"
+                                    >
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                    @if ($jadwals->isEmpty())
+                        <tr>
+                            <td colspan="11" class="text-center">
+                                Data Tidak Ditemukan
+                            </td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
+        <!-- Pagination -->
+        <div class="d-flex justify-content-end">
+            {{ $jadwals->links() }}
+        </div>
     </div>
 </x-app-layout>

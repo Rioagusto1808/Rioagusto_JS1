@@ -105,7 +105,8 @@
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 position: sticky;
                 top: 20px;
-                min-height: 600px;
+                min-height: 550px;
+                max-height: 600px;
             }
 
             .card-img-top {

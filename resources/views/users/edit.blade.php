@@ -89,51 +89,74 @@
                 </select>
             </div>
 
+            <!-- Password Field -->
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    class="form-control shadow-sm"
-                />
+                <div class="input-group">
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="Enter password"
+                    />
+                    <button
+                        class="btn btn-outline-secondary"
+                        type="button"
+                        id="togglePassword"
+                    >
+                        <i class="bi bi-eye-fill"></i>
+                    </button>
+                </div>
                 @error('password')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
+            <!-- Confirm Password Field -->
             <div class="mb-3">
                 <label for="password_confirmation" class="form-label">
                     Confirm Password
                 </label>
-                <input
-                    type="password"
-                    name="password_confirmation"
-                    id="password_confirmation"
-                    class="form-control shadow-sm"
-                />
+                <div class="input-group">
+                    <input
+                        type="password"
+                        name="password_confirmation"
+                        id="password_confirmation"
+                        class="form-control"
+                        placeholder="Confirm your password"
+                    />
+                    <button
+                        class="btn btn-outline-secondary"
+                        type="button"
+                        id="togglePasswordConfirm"
+                    >
+                        <i class="bi bi-eye-fill"></i>
+                    </button>
+                </div>
                 @error('password_confirmation')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
+            <!-- Roles Field -->
             <div class="form-group mb-4">
                 <label class="font-weight-medium">Roles</label>
                 <div class="d-flex flex-wrap">
                     @if ($roles->isNotEmpty())
                         @foreach ($roles as $role)
-                            <div class="form-check m-2">
+                            <div class="form-check form-check-inline m-2">
                                 <input
-                                    {{ $hasRoles->contains($role->id) ? 'checked' : '' }}
                                     id="role-{{ $role->id }}"
                                     type="checkbox"
-                                    class="form-check-input shadow-sm"
+                                    class="form-check-input"
                                     name="role[]"
                                     value="{{ $role->name }}"
+                                    {{ (is_array(old('role')) && in_array($role->name, old('role'))) || (isset($user) && $user->hasRole($role->name)) ? 'checked' : '' }}
                                 />
                                 <label
-                                    class="form-check-label"
                                     for="role-{{ $role->id }}"
+                                    class="form-check-label"
                                 >
                                     {{ $role->name }}
                                 </label>
@@ -149,3 +172,34 @@
         </form>
     </div>
 </x-app-layout>
+<script>
+    // Toggle Password Visibility
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    togglePassword.addEventListener('click', () => {
+        const type =
+            password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        togglePassword.innerHTML =
+            type === 'password'
+                ? '<i class="bi bi-eye-fill"></i>'
+                : '<i class="bi bi-eye-slash-fill"></i>';
+    });
+
+    // Toggle Confirm Password Visibility
+    const togglePasswordConfirm = document.querySelector(
+        '#togglePasswordConfirm'
+    );
+    const passwordConfirm = document.querySelector('#password_confirmation');
+    togglePasswordConfirm.addEventListener('click', () => {
+        const type =
+            passwordConfirm.getAttribute('type') === 'password'
+                ? 'text'
+                : 'password';
+        passwordConfirm.setAttribute('type', type);
+        togglePasswordConfirm.innerHTML =
+            type === 'password'
+                ? '<i class="bi bi-eye-fill"></i>'
+                : '<i class="bi bi-eye-slash-fill"></i>';
+    });
+</script>

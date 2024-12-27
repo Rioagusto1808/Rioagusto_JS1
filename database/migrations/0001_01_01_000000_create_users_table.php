@@ -24,6 +24,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger('guru_id')->nullable();
             $table->foreign('guru_id')->references('id')->on('guru')->onDelete('set null');
+            $table->unsignedBigInteger('siswa_id')->nullable();
+            $table->foreign('siswa_id')->references('id')->on('siswa')->onDelete('set null');
             $table->foreignUuid('profile_picture')->nullable();
         });
 

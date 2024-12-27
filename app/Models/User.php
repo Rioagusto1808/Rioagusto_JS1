@@ -56,4 +56,17 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Guru::class, 'guru_id');
     }
+
+    public function profile()
+    {
+        return $this->belongsTo(File::class, 'profile_picture');
+    }
+
+    /**
+     * Get the image associated with the user.
+     */
+    public function image()
+    {
+        return $this->belongsTo(File::class, 'profile_picture', 'id');
+    }
 }

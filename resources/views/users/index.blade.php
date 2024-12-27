@@ -76,7 +76,7 @@
                             class="form-select"
                             aria-label="Pilih Kelas"
                         >
-                            <option value="">Pilih Kelas</option>
+                            <option value="">Pilih Guru</option>
                             @foreach ($gurus as $k)
                                 <option
                                     value="{{ $k->id }}"

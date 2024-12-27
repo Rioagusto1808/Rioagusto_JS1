@@ -151,6 +151,55 @@
             .news-card:hover {
                 transform: translateY(-5px);
             }
+            /* Header styling */
+            .form-header {
+                text-align: center;
+                padding: 40px 20px;
+                background-color: white;
+                color: black;
+                border-radius: 8px;
+                margin-bottom: 20px;
+            }
+
+            .form-header h2 {
+                margin: 0;
+                font-size: 28px;
+            }
+
+            .form-header p {
+                margin: 10px 0 0;
+                font-size: 16px;
+            }
+
+            .mb-3 {
+                margin-bottom: 20px;
+            }
+
+            label.form-label {
+                font-weight: 600;
+                font-size: 16px;
+                color: #555;
+            }
+
+            .form-control {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                font-size: 14px;
+                background-color: #f8f8f8;
+                transition: border-color 0.3s ease;
+            }
+
+            .form-control:focus {
+                border-color: #007bff;
+                background-color: #fff;
+                outline: none;
+            }
+
+            textarea.form-control {
+                resize: none;
+            }
         </style>
     </head>
     <body>
@@ -174,9 +223,68 @@
             <!-- Content Wrapper -->
             <div class="content-wrapper">
                 <!-- Main Content -->
+                <x-message></x-message>
                 <div class="main-content">
                     <div class="row gy-4">
-                        <!-- Add more news items as necessary. They will automatically flow into the next row. -->
+                        <div class="form-header">
+                            <div style="text-align: left">
+                                <p>
+                                    Layanan Informasi Sekolah adalah wadah
+                                    komunikasi atau konsultasi permasalahan
+                                    sekolah untuk membantu siswa/siswi dan orang
+                                    tua dalam penyelesaian permasalahan sekolah
+                                    baik akademik maupun non akademik.
+                                </p>
+                                <p>
+                                    Layanan ini juga dapat dimanfaatkan oleh
+                                    berbagai macam kalangan yang berkaita dengan
+                                    SD N Peraduan Waras
+                                </p>
+                                <p>
+                                    Setiap pertanyaan akan dijawab/dibalas
+                                    melalui email.
+                                </p>
+                            </div>
+                        </div>
+                        <form
+                            action="{{ route('pengaduan.store') }}"
+                            method="POST"
+                        >
+                            @csrf
+                            <div class="mb-3">
+                                <label for="email" class="form-label">
+                                    Email
+                                </label>
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Masukkan email Anda"
+                                    required
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label for="alasan" class="form-label">
+                                    Isi Pesan
+                                </label>
+                                <textarea
+                                    class="form-control"
+                                    id="alasan"
+                                    name="alasan"
+                                    rows="5"
+                                    placeholder="Tulis pesan Anda di sini..."
+                                    required
+                                ></textarea>
+                            </div>
+                            <button
+                                type="submit"
+                                class="btn btn-customs text-white"
+                                style="background-color: #007bff; width: 10%"
+                            >
+                                Kirim Pesan
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <div class="right-bar">

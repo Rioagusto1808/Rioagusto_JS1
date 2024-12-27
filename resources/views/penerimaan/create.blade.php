@@ -10,50 +10,51 @@
 
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>
-                <input type="text" name="nama" class="form-control" required />
+                <input type="text" name="nama" class="form-control" />
+                @error('nama')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3">
                 <label for="nisn" class="form-label">NISN</label>
-                <input type="text" name="nisn" class="form-control" required />
+                <input type="text" name="nisn" class="form-control" />
+                @error('nisn')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3">
                 <label for="tempat_lahir" class="form-label">
                     Tempat Lahir
                 </label>
-                <input
-                    type="text"
-                    name="tempat_lahir"
-                    class="form-control"
-                    required
-                />
+                <input type="text" name="tempat_lahir" class="form-control" />
+                @error('tempat_lahir')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3">
                 <label for="tanggal_lahir" class="form-label">
                     Tanggal Lahir
                 </label>
-                <input
-                    type="date"
-                    name="tanggal_lahir"
-                    class="form-control"
-                    required
-                />
+                <input type="date" name="tanggal_lahir" class="form-control" />
+                @error('tanggal_lahir')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
-                <textarea
-                    name="alamat"
-                    class="form-control"
-                    required
-                ></textarea>
+                <textarea name="alamat" class="form-control"></textarea>
+                @error('alamat')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
-                <select name="status" class="form-control" required>
+                <select name="status" class="form-control">
                     <option value="diterima">Diterima</option>
                     <option value="ditolak">Ditolak</option>
                     <option value="menunggu">Menunggu</option>

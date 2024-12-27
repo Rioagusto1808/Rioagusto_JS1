@@ -17,8 +17,7 @@
                     id="name"
                     class="form-control"
                     value="{{ old('name') }}"
-                    placeholder="Enter user's name"
-                    required
+                    placeholder="Masukkan Username"
                 />
                 @error('name')
                     <div class="text-danger">{{ $message }}</div>
@@ -34,8 +33,7 @@
                     id="email"
                     class="form-control"
                     value="{{ old('email') }}"
-                    placeholder="Enter user's email"
-                    required
+                    placeholder="Masukkan Email"
                 />
                 @error('email')
                     <div class="text-danger">{{ $message }}</div>
@@ -51,8 +49,7 @@
                     id="nomor_hp"
                     class="form-control"
                     value="{{ old('nomor_hp') }}"
-                    placeholder="Enter user's phone number"
-                    required
+                    placeholder="Masukkan Nomor Handphone"
                 />
                 @error('nomor_hp')
                     <div class="text-danger">{{ $message }}</div>
@@ -62,7 +59,8 @@
             <!-- Status Field -->
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
-                <select name="status" id="status" class="form-select" required>
+                <select name="status" id="status" class="form-select">
+                    <option value="">--Pilih Status--</option>
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
                     <option value="banned">Banned</option>
@@ -73,7 +71,7 @@
             <div class="mb-3">
                 <label for="guru_id" class="form-label">Guru</label>
                 <select name="guru_id" id="guru_id" class="form-select">
-                    <option value="">-- Select Guru --</option>
+                    <option value="">--Pilih Guru--</option>
                     @foreach ($gurus as $guru)
                         <option
                             value="{{ $guru->id }}"
@@ -88,14 +86,22 @@
             <!-- Password Field -->
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    class="form-control"
-                    placeholder="Enter password"
-                    required
-                />
+                <div class="input-group">
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="Masukkan Password"
+                    />
+                    <button
+                        class="btn btn-outline-secondary"
+                        type="button"
+                        id="togglePassword"
+                    >
+                        <i class="bi bi-eye-fill"></i>
+                    </button>
+                </div>
                 @error('password')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -106,14 +112,22 @@
                 <label for="password_confirmation" class="form-label">
                     Confirm Password
                 </label>
-                <input
-                    type="password"
-                    name="password_confirmation"
-                    id="password_confirmation"
-                    class="form-control"
-                    placeholder="Confirm your password"
-                    required
-                />
+                <div class="input-group">
+                    <input
+                        type="password"
+                        name="password_confirmation"
+                        id="password_confirmation"
+                        class="form-control"
+                        placeholder="Konfirmasi Password"
+                    />
+                    <button
+                        class="btn btn-outline-secondary"
+                        type="button"
+                        id="togglePasswordConfirm"
+                    >
+                        <i class="bi bi-eye-fill"></i>
+                    </button>
+                </div>
                 @error('password_confirmation')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -152,3 +166,34 @@
         </form>
     </div>
 </x-app-layout>
+<script>
+    // Toggle Password Visibility
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    togglePassword.addEventListener('click', () => {
+        const type =
+            password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        togglePassword.innerHTML =
+            type === 'password'
+                ? '<i class="bi bi-eye-fill"></i>'
+                : '<i class="bi bi-eye-slash-fill"></i>';
+    });
+
+    // Toggle Confirm Password Visibility
+    const togglePasswordConfirm = document.querySelector(
+        '#togglePasswordConfirm'
+    );
+    const passwordConfirm = document.querySelector('#password_confirmation');
+    togglePasswordConfirm.addEventListener('click', () => {
+        const type =
+            passwordConfirm.getAttribute('type') === 'password'
+                ? 'text'
+                : 'password';
+        passwordConfirm.setAttribute('type', type);
+        togglePasswordConfirm.innerHTML =
+            type === 'password'
+                ? '<i class="bi bi-eye-fill"></i>'
+                : '<i class="bi bi-eye-slash-fill"></i>';
+    });
+</script>

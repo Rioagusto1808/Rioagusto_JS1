@@ -92,16 +92,10 @@
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-5">
                     <!-- Links -->
                     <h6 class="fw-bold">Sosial Media</h6>
-                    <a
-                        href="https://www.facebook.com/profile.php?id=100080233301689&mibextid=ZbWKwL"
-                        class="text-white m-1"
-                    >
+                    <a href="/" class="text-white m-1">
                         <i class="fab fa-facebook"></i>
                     </a>
-                    <a
-                        href="https://www.instagram.com/bagian_hukum_pesawaran/profilecard/?igsh=MWFsNWdqNHkxNDExdQ== "
-                        class="text-white m-1"
-                    >
+                    <a href="/" class="text-white m-1">
                         <i class="fab fa-instagram"></i>
                     </a>
                     <a href="" class="text-white m-1">

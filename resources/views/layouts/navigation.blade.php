@@ -84,7 +84,9 @@
                                 </a>
                             </li>
                         </ul>
+                    @endif
 
+                    @if (Auth::user()->can('Guru'))
                         <ul class="navbar-nav">
                             <!-- Data Dropdown -->
                             <li class="nav-item dropdown">
@@ -110,90 +112,140 @@
                                             Data Siswa
                                         </a>
                                     </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/nilai">
+                                            Nilai Siswa
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
                     @endif
 
-                    <!-- Additional Menu Links -->
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="/pengaduan"
-                                @click="navbarOpen = false"
-                            >
-                                {{ __('Pengaduan') }}
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="/penerimaan"
-                                @click="navbarOpen = false"
-                            >
-                                {{ __('PPDB') }}
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="/berita"
-                                @click="navbarOpen = false"
-                            >
-                                {{ __('Berita') }}
-                            </a>
-                        </li>
-                    </ul>
+                    @if (Auth::user()->can('Staff') || Auth::user()->can('Kepala Sekolah'))
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="/pengaduan"
+                                    @click="navbarOpen = false"
+                                >
+                                    {{ __('Pengaduan') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="/penerimaan"
+                                    @click="navbarOpen = false"
+                                >
+                                    {{ __('PPDB') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="/berita"
+                                    @click="navbarOpen = false"
+                                >
+                                    {{ __('Berita') }}
+                                </a>
+                            </li>
+                        </ul>
+                    @endif
 
-                    <ul class="navbar-nav">
-                        <!-- Jadwal & Kelas Dropdown -->
-                        <li class="nav-item dropdown">
-                            <a
-                                class="dropdown-toggle nav-link"
-                                href="#"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                            >
-                                {{ __('Jadwal & Kelas') }}
-                            </a>
-                            <ul
-                                class="dropdown-menu"
-                                style="border-radius: 10px"
-                            >
-                                <li>
-                                    <a class="dropdown-item" href="/kelas">
-                                        Kelas
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        class="dropdown-item"
-                                        href="/mata_pelajaran"
-                                    >
-                                        Mata Pelajaran
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/jadwal">
-                                        Tahun Ajaran & Mata Pelajaran
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    @if (Auth::user()->can('Staff') || Auth::user()->can('Kepala Sekolah') || Auth::user()->can('Guru'))
+                        <ul class="navbar-nav">
+                            <!-- Jadwal & Kelas Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="dropdown-toggle nav-link"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                >
+                                    {{ __('Jadwal & Kelas') }}
+                                </a>
+                                <ul
+                                    class="dropdown-menu"
+                                    style="border-radius: 10px"
+                                >
+                                    <li>
+                                        <a class="dropdown-item" href="/kelas">
+                                            Kelas
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/mata_pelajaran"
+                                        >
+                                            Mata Pelajaran
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/jadwal">
+                                            Tahun Ajaran & Mata Pelajaran
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    @endif
+
+                    @if (Auth::check() && Auth::user()->hasRole('Siswa'))
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="/nilai"
+                                    @click="navbarOpen = false"
+                                >
+                                    {{ __('Nilai') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="/jadwal"
+                                    @click="navbarOpen = false"
+                                >
+                                    {{ __('Mata Pelajaran') }}
+                                </a>
+                            </li>
+                        </ul>
+                    @endif
 
                     <!-- Profile Dropdown -->
-                    <ul class="navbar-nav ms-auto me-5">
+                    <ul class="navbar-nav ms-auto" style="margin-right: 100px">
                         <li class="nav-item dropdown">
                             <a
-                                class="dropdown-toggle nav-link"
+                                class="nav-link"
                                 href="#"
                                 role="button"
                                 data-bs-toggle="dropdown"
                             >
-                                {{ Auth::user()->name }}
+                                @if (Auth::user()->image)
+                                    <img
+                                        src="{{ route('file.show', Auth::user()->image->id) }}"
+                                        alt="{{ Auth::user()->name }}"
+                                        class="rounded-circle"
+                                        width="50"
+                                        height="50"
+                                        style="object-fit: cover"
+                                    />
+                                @else
+                                    <img
+                                        src="{{ asset('images/default_profile.jpg') }}"
+                                        alt=""
+                                        class="rounded-circle"
+                                        width="50"
+                                        height="50"
+                                        style="object-fit: cover"
+                                    />
+                                @endif
                             </a>
+
                             <ul class="dropdown-menu">
                                 <li>
                                     <a class="dropdown-item" href="/">

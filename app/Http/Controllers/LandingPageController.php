@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Guru;
+use App\Models\Kelas;
+use App\Models\Siswa;
 
 class LandingPageController extends Controller
 {
@@ -20,6 +23,11 @@ class LandingPageController extends Controller
             ->take(4)
             ->get();
 
-        return view('landingpages.welcome', compact('galeri', 'beritaTerbaru'));
+        $guruscount = Guru::get()->count();
+        $siswascount = Siswa::where('status', 'belum lulus')->get()->count();
+        $classcount = Kelas::get()->count();
+        $alumnicount = Siswa::where('status', 'lulus')->get()->count();
+
+        return view('landingpages.welcome', compact('galeri', 'beritaTerbaru', 'guruscount', 'siswascount', 'classcount', 'alumnicount'));
     }
 }

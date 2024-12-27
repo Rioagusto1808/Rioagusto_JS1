@@ -15,6 +15,7 @@ class PermissionSeeder extends Seeder
             'Kepala Sekolah' => ['Kepala Sekolah'],
             'Staff' => ['Staff'],
             'Guru' => ['Guru'],
+            'Siswa' => ['Siswa'],
         ];
 
         // Membuat role Superadmin tanpa permissions

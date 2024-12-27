@@ -44,7 +44,7 @@ class PenerimaanSiswaController extends Controller
     // Menyimpan penerimaan siswa baru ke database
     public function store(Request $request)
     {
-        // Validasi input
+        // Validasi input dengan pesan kustom
         $request->validate([
             'nama' => 'required|string|max:255',
             'nisn' => 'required|string|unique:penerimaan_siswa_baru,nisn|max:20',
@@ -52,6 +52,28 @@ class PenerimaanSiswaController extends Controller
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string',
             'status' => 'required|in:diterima,ditolak,menunggu',
+        ], [
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.string' => 'Nama harus berupa teks.',
+            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+
+            'nisn.required' => 'NISN wajib diisi.',
+            'nisn.string' => 'NISN harus berupa teks.',
+            'nisn.unique' => 'NISN sudah terdaftar, silakan gunakan NISN lain.',
+            'nisn.max' => 'NISN tidak boleh lebih dari 20 karakter.',
+
+            'tempat_lahir.required' => 'Tempat lahir wajib diisi.',
+            'tempat_lahir.string' => 'Tempat lahir harus berupa teks.',
+            'tempat_lahir.max' => 'Tempat lahir tidak boleh lebih dari 255 karakter.',
+
+            'tanggal_lahir.required' => 'Tanggal lahir wajib diisi.',
+            'tanggal_lahir.date' => 'Tanggal lahir harus berupa format tanggal yang valid.',
+
+            'alamat.required' => 'Alamat wajib diisi.',
+            'alamat.string' => 'Alamat harus berupa teks.',
+
+            'status.required' => 'Status wajib diisi.',
+            'status.in' => 'Status harus salah satu dari: diterima, ditolak, atau menunggu.',
         ]);
 
         // Simpan data ke database

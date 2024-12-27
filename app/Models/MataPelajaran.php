@@ -15,4 +15,9 @@ class MataPelajaran extends Model
         'nama_mapel',
         'kode_mapel',
     ];
+
+    public function detailNilai()
+    {
+        return $this->hasMany(DetailNilai::class, 'mapel_id');
+    }
 }

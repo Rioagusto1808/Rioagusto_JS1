@@ -3,7 +3,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>SIAK SD</title>
+
+        <link
+            rel="icon"
+            href="{{ asset('images/tut_wuri_handa.png') }}"
+            type="image/x-icon"
+        />
         <!-- Include Bootstrap CSS -->
     </head>
     <body>
@@ -152,19 +157,27 @@
             <div class="statistik-view text-center">
                 <div class="row justify-content-center">
                     <div class="col-md-2 col-sm-4 col-6 statistik-item">
-                        <h2 class="counter" data-target="69">69</h2>
+                        <h2 class="counter" data-target="{{ $siswascount }}">
+                            {{ $siswascount }}
+                        </h2>
                         <p>Total Siswa</p>
                     </div>
                     <div class="col-md-2 col-sm-4 col-6 statistik-item">
-                        <h2 class="counter" data-target="2617">2617</h2>
+                        <h2 class="counter" data-target="{{ $guruscount }}">
+                            {{ $guruscount }}
+                        </h2>
                         <p>Guru/Tendik</p>
                     </div>
                     <div class="col-md-2 col-sm-4 col-6 statistik-item">
-                        <h2 class="counter" data-target="3190">3190</h2>
+                        <h2 class="counter" data-target="{{ $classcount }}">
+                            {{ $classcount }}
+                        </h2>
                         <p>Total Kelas</p>
                     </div>
                     <div class="col-md-2 col-sm-4 col-6 statistik-item">
-                        <h2 class="counter" data-target="3190">3190</h2>
+                        <h2 class="counter" data-target="{{ $alumnicount }}">
+                            {{ $alumnicount }}
+                        </h2>
                         <p>Alumni</p>
                     </div>
                     <div class="col-md-2 col-sm-4 col-6 statistik-item">

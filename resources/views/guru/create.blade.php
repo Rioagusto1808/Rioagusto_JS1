@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container">
+    <div class="container mb-3">
         <h1 class="mb-4">Tambah Guru</h1>
         <form
             action="{{ route('guru.store') }}"
@@ -78,6 +78,7 @@
             <div class="mb-3">
                 <label for="mapel_id" class="form-label">Mata Pelajaran</label>
                 <select name="mapel_id" class="form-control">
+                    <option value="">--Pilih Mata Pelajaran--</option>
                     @foreach ($mapel as $matapelajaran)
                         <option value="{{ $matapelajaran->id }}">
                             {{ $matapelajaran->nama_mapel }}

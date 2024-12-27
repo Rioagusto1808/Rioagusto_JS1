@@ -2,14 +2,16 @@
     <div class="container mb-4">
         <h1 class="mb-4">Daftar Siswa</h1>
         <div class="d-flex justify-content-between mb-4">
-            <!-- "Tambah Siswa" Button -->
-            <a
-                href="{{ route('siswa.create') }}"
-                class="btn btn-success shadow-sm"
-            >
-                <i class="bi bi-person-plus"></i>
-                Tambah Siswa
-            </a>
+            @if (Auth::check() && Auth::user()->hasRole('Guru'))
+                <!-- "Tambah Siswa" Button -->
+                <a
+                    href="{{ route('siswa.create') }}"
+                    class="btn btn-success shadow-sm"
+                >
+                    <i class="bi bi-person-plus"></i>
+                    Tambah Siswa
+                </a>
+            @endif
 
             <!-- Search Form -->
             <form
@@ -102,6 +104,7 @@
                         <th>Tahun Masuk</th>
                         <th>Tahun Lulus</th>
                         <th>Kelas</th>
+                        <th>Wali Kelas</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -118,6 +121,7 @@
                             <td>{{ $item->tahun_masuk }}</td>
                             <td>{{ $item->tahun_lulus ?? '-' }}</td>
                             <td>{{ $item->kelas->tingkat }}</td>
+                            <td>{{ $item->waliKelas->nama ?? '-' }}</td>
                             <td>
                                 <span
                                     class="badge @if ($item->status == 'lulus') bg-success @elseif ($item->status == 'belum lulus') bg-warning @else bg-danger @endif"

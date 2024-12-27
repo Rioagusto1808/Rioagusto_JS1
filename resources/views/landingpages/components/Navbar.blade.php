@@ -113,18 +113,6 @@
                     </ul>
                 </li>
 
-                <!-- Alumni -->
-                <li class="nav-item">
-                    <a
-                        class="nav-link text-white"
-                        href="/alumni"
-                        id="alumniDropdown"
-                        role="button"
-                    >
-                        Data Alumni
-                    </a>
-                </li>
-
                 <!-- Hubungi Kami -->
                 <li class="nav-item">
                     <a
@@ -161,37 +149,22 @@
                     </a>
                 </li>
 
-                <!-- Informasi -->
-                <li class="nav-item dropdown">
+                <li class="nav-item">
                     <a
-                        class="nav-link dropdown-toggle text-white"
-                        href="#"
+                        class="nav-link text-white"
+                        href="/ppdb"
                         id="galeriDropdown"
                         role="button"
-                        data-bs-toggle="dropdown"
                     >
-                        Informasi
+                        PPDB
                     </a>
-                    <ul class="dropdown-menu" style="border-radius: 10px">
-                        <li><a class="dropdown-item" href="/ppdb">PPDB</a></li>
-                        <li>
-                            <a class="dropdown-item" href="/data-siswa">
-                                Data Siswa
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/data-guru">
-                                Data Guru
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
                 <!-- Layanan Informasi Sekolah -->
                 <li class="nav-item">
                     <a
                         class="nav-link text-white"
-                        href="layanan-informasi"
+                        href="{{ route('LayananInformasi') }}"
                         role="button"
                     >
                         Layanan Informasi

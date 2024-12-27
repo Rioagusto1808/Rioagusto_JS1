@@ -203,7 +203,7 @@
                 text-align: justify; /* Teks teratur di kedua sisi */
             }
             .content-container {
-                white-space: pre-wrap; /* Menangani spasi dan enter */
+                white-space: pre-wrap;
             }
 
             /* Menyesuaikan dengan lebar layar kecil */
@@ -216,48 +216,74 @@
 
             .container-wrapper {
                 display: flex;
-                justify-content: space-between; /* Mengatur elemen agar berjauhan */
-                align-items: flex-start; /* Agar sidebar dan konten utama sejajar di atas */
+                justify-content: space-between;
+                align-items: flex-start;
                 padding: 20px;
             }
 
             .right-container {
-                width: 350px; /* Lebar sidebar */
-                margin-left: 20px; /* Jarak antara konten utama dan sidebar */
-                background-color: #ffffff;
+                width: 350px;
+                margin-left: 20px;
                 border-radius: 10px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 overflow: hidden;
             }
 
-            .search-bar {
+            .search-form {
                 display: flex;
+                justify-content: left;
                 align-items: center;
-                padding: 10px;
-                background-color: #ffffff;
-                border-bottom: 1px solid #ddd;
+                gap: 10px;
+                margin: 20px auto;
+                max-width: 600px;
             }
 
-            .search-bar input {
-                border: none;
+            .search-input {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+                border: 2px solid #007bff; /* Warna border biru */
+                border-radius: 25px;
                 outline: none;
-                padding: 10px;
-                flex-grow: 1;
-                font-size: 0.9rem;
-                color: #495057;
+                box-sizing: border-box; /* Memastikan padding dan border tidak mengubah ukuran input */
+                transition: border-color 0.3s ease-in-out; /* Transisi pada border */
             }
 
-            .search-bar button {
+            .search-input:focus {
+                border-color: #0056b3; /* Warna border berubah saat fokus */
+            }
+
+            .search-button {
+                padding: 10px 20px;
+                font-size: 16px;
+                background-color: #007bff; /* Warna latar belakang biru */
+                color: white;
                 border: none;
-                background-color: transparent;
-                color: #495057;
+                border-radius: 25px;
                 cursor: pointer;
-                padding: 5px 10px;
-                font-size: 1.2rem;
+                transition: background-color 0.3s ease-in-out;
             }
 
-            .search-bar button:hover {
-                color: #007bff;
+            .search-button:hover {
+                background-color: #0056b3; /* Warna latar belakang berubah saat hover */
+            }
+
+            .search-button:active {
+                background-color: #004085; /* Warna saat tombol ditekan */
+            }
+
+            @media (max-width: 768px) {
+                .search-form {
+                    flex-direction: column;
+                    gap: 10px;
+                }
+
+                .search-input {
+                    width: 100%;
+                }
+
+                .search-button {
+                    width: 100%;
+                }
             }
 
             .news-content {
@@ -372,7 +398,7 @@
                             <!-- Kontainer untuk Konten -->
                             <div class="content-container">
                                 <p class="text-muted" style="font-size: 18px">
-                                    {{ $berita->content }}
+                                    {!! $berita->content !!}
                                 </p>
                             </div>
                         </div>
@@ -382,15 +408,22 @@
                     <div class="container-wrapper">
                         <!-- Sidebar Component -->
                         <div class="right-container">
-                            <div class="search-bar">
+                            <form
+                                action="{{ route('berita_all.index') }}"
+                                method="GET"
+                                class="search-form"
+                            >
                                 <input
                                     type="text"
-                                    placeholder="Search news..."
+                                    name="search"
+                                    value="{{ request()->search }}"
+                                    placeholder="Cari berdasarkan judul"
+                                    class="search-input"
                                 />
-                                <button type="button">
-                                    <i class="bi bi-search"></i>
+                                <button type="submit" class="search-button">
+                                    Cari
                                 </button>
-                            </div>
+                            </form>
                             @foreach ($beritas as $item)
                                 <a
                                     href="{{ route('berita_id.show', $item->id) }}"

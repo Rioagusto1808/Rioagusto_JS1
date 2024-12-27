@@ -53,9 +53,9 @@
             }
 
             .visi-misi-title .pipe {
-                color: #007bff; /* Warna biru terang */
+                color: #007bff;
                 margin-top: -10px;
-                font-size: 30px; /* Sesuaikan ukuran garis dengan ukuran teks */
+                font-size: 30px;
                 margin-right: 10px; /* Jarak antara garis dan teks */
                 animation: fadePipe 1.5s ease-in-out infinite;
             }
@@ -199,7 +199,7 @@
                 display: flex;
                 justify-content: left;
                 align-items: center;
-                gap: 10px; /* Jarak antar elemen */
+                gap: 10px;
                 margin: 5px;
                 width: 100%;
             }
@@ -208,11 +208,11 @@
                 width: 30%;
                 padding: 10px;
                 font-size: 10px;
-                border: 2px solid #007bff; /* Warna border biru */
+                border: 2px solid #007bff;
                 border-radius: 25px;
                 outline: none;
-                box-sizing: border-box; /* Memastikan padding dan border tidak mengubah ukuran input */
-                transition: border-color 0.3s ease-in-out; /* Transisi pada border */
+                box-sizing: border-box;
+                transition: border-color 0.3s ease-in-out;
             }
 
             .search-input:focus {
@@ -296,7 +296,7 @@
                                     <select
                                         name="status"
                                         class="search-input"
-                                        style="max-width: 150px; height: 40px"
+                                        style="max-width: 150px; height: 50px"
                                     >
                                         <option value="">Semua Status</option>
                                         <option

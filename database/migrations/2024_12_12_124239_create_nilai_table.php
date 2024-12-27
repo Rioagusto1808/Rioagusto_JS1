@@ -11,8 +11,6 @@ return new class extends Migration
         Schema::create('nilai', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('siswa_id');
-            $table->string('mata_pelajaran');
-            $table->float('nilai');
             $table->string('tahun_ajaran');
             $table->integer('semester');
             $table->unsignedBigInteger('guru_id');

@@ -18,6 +18,7 @@ class RoleSeeder extends Seeder
             'Kepala Sekolah',
             'Staff',
             'Guru',
+            'Siswa',
         ];
 
         // Create roles if they don't exist
