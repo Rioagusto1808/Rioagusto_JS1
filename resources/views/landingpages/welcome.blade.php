@@ -243,12 +243,14 @@
                         </div>
                     @endforeach
                 </div>
-                <a
-                    href="/full-galeri"
-                    class="btn btn-primary view-more-btn custom-width"
-                >
-                    Lihat Semua
-                </a>
+                @if (! empty($berita))
+                    <a
+                        href="/full-galeri"
+                        class="btn btn-primary view-more-btn custom-width"
+                    >
+                        Lihat Semua
+                    </a>
+                @endif
             </div>
 
             <div class="container news-section px-3">

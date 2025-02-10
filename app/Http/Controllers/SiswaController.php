@@ -6,6 +6,7 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class SiswaController extends Controller
@@ -13,8 +14,17 @@ class SiswaController extends Controller
     // Menampilkan data siswa
     public function index(Request $request)
     {
-        // Ambil guru yang sedang login
+        if (! Auth::user()->hasRole('Superadmin') &&
+    ! Auth::user()->hasRole('Siswa') &&
+    ! Auth::user()->hasRole('Guru')) {
+
+            Auth::logout();
+
+            return redirect('/login')->withErrors(['error' => 'Akses ditolak, Anda tidak memiliki izin!']);
+        }
+
         $guru = auth()->user();  // Asumsi Anda menggunakan Auth untuk login
+        $user = auth()->user();  // Asumsi Anda menggunakan Auth untuk login
 
         // Ambil parameter pencarian
         $nama = $request->input('nama');
@@ -31,6 +41,11 @@ class SiswaController extends Controller
                 // Filter berdasarkan guru_id pada relasi waliKelas
                 $query->where('guru_id', $guru->guru_id);
             });
+        }
+
+        // Jika role pengguna adalah 'Siswa', hanya tampilkan data siswa yang namanya sama dengan user.name
+        if ($user->hasRole('Siswa')) {
+            $query->where('nama', $user->name);
         }
 
         // Tambahkan filter pencarian berdasarkan nama, nis, status, dan kelas jika ada
@@ -169,6 +184,33 @@ class SiswaController extends Controller
         Siswa::create($validated); // Menyimpan data
 
         return redirect()->route('siswa.index')->with('success', 'Siswa berhasil ditambahkan.');
+    }
+
+    public function show($id)
+    {
+        // Ambil user yang sedang login
+        $user = auth()->user();
+
+        // Query untuk mencari siswa berdasarkan ID
+        $query = Siswa::query();
+
+        // Jika role pengguna adalah 'Guru', hanya izinkan melihat siswa yang berada di wali kelasnya
+        if ($user->hasRole('Guru') && $user->guru_id) {
+            $query->whereHas('waliKelas', function ($q) use ($user) {
+                $q->where('guru_id', $user->guru_id);
+            });
+        }
+
+        // Jika role pengguna adalah 'Siswa', hanya izinkan melihat data dirinya sendiri
+        if ($user->hasRole('Siswa')) {
+            $query->where('nama', $user->name);
+        }
+
+        // Ambil data siswa
+        $siswa = $query->findOrFail($id);
+
+        // Kembalikan view dengan data siswa
+        return view('siswa.show', compact('siswa'));
     }
 
     // Menampilkan form untuk mengedit data siswa

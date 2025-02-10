@@ -114,27 +114,29 @@
                                 >
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a
-                                    href="{{ route('nilai.edit', $item->id) }}"
-                                    class="btn btn-warning btn-sm"
-                                >
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                                <form
-                                    action="{{ route('nilai.destroy', $item->id) }}"
-                                    method="POST"
-                                    style="display: inline"
-                                >
-                                    @csrf
-                                    @method('DELETE')
-                                    <button
-                                        type="submit"
-                                        class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Apakah Anda yakin?')"
+                                @if (Auth::user()->can('Guru'))
+                                    <a
+                                        href="{{ route('nilai.edit', $item->id) }}"
+                                        class="btn btn-warning btn-sm"
                                     >
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <form
+                                        action="{{ route('nilai.destroy', $item->id) }}"
+                                        method="POST"
+                                        style="display: inline"
+                                    >
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            type="submit"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Apakah Anda yakin?')"
+                                        >
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

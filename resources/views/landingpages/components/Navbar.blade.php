@@ -176,7 +176,6 @@
                     @auth
                         <!-- Jika pengguna sudah login, tampilkan link ke Dashboard -->
                         <a
-                            style="margin-top: 10px"
                             class="nav-link btn"
                             href="{{ route('dashboard.index') }}"
                             role="button"

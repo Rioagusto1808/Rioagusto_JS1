@@ -14,13 +14,15 @@
 
         <div class="d-flex justify-content-between mb-4">
             <!-- "Tambah Siswa" Button -->
-            <a
-                href="{{ route('jadwal.create') }}"
-                class="btn btn-success shadow-sm"
-            >
-                <i class="bi bi-person-plus"></i>
-                Tambah Jadwal
-            </a>
+            @if (Auth::user()->can('Staff'))
+                <a
+                    href="{{ route('jadwal.create') }}"
+                    class="btn btn-success shadow-sm"
+                >
+                    <i class="bi bi-person-plus"></i>
+                    Tambah Jadwal
+                </a>
+            @endif
 
             <!-- Search Form -->
             <form

@@ -154,7 +154,7 @@
                         </ul>
                     @endif
 
-                    @if (Auth::user()->can('Staff') || Auth::user()->can('Kepala Sekolah') || Auth::user()->can('Guru'))
+                    @if (Auth::user()->can('Staff'))
                         <ul class="navbar-nav">
                             <!-- Jadwal & Kelas Dropdown -->
                             <li class="nav-item dropdown">
@@ -211,6 +211,15 @@
                                     @click="navbarOpen = false"
                                 >
                                     {{ __('Mata Pelajaran') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="/siswa"
+                                    @click="navbarOpen = false"
+                                >
+                                    {{ __('Data') }}
                                 </a>
                             </li>
                         </ul>

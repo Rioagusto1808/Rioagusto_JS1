@@ -18,6 +18,9 @@ class NilaiController extends Controller
      */
     public function index(Request $request)
     {
+        // Ambil user yang sedang login
+        $user = auth()->user();
+
         // Ambil nilai pencarian dari request
         $siswaId = $request->get('siswa_id');
         $semester = $request->get('semester');
@@ -27,6 +30,23 @@ class NilaiController extends Controller
 
         // Query untuk mengambil data nilai dengan pencarian
         $query = Nilai::with('detailNilai', 'siswa', 'guru')->latest();
+
+        // Cek role dan filter data sesuai
+        if ($user->hasRole('Siswa')) {
+            // Jika role Siswa, tampilkan hanya nilai siswa yang sesuai dengan nama user
+            $query->whereHas('siswa', function ($q) use ($user) {
+                $q->where('nama', $user->name);
+            });
+        } elseif ($user->hasRole('Guru')) {
+            // Jika role Guru, tampilkan hanya nilai yang dibuat oleh guru tersebut
+            $query->where('guru_id', $user->guru_id);
+        } elseif ($user->hasRole('Superadmin')) {
+            // Jika role Superadmin, tampilkan semua data (tidak ada filter tambahan)
+            // Tidak ada filter tambahan karena superadmin punya akses penuh
+        } else {
+            // Jika role tidak dikenali, tolak akses
+            return abort(403, 'Anda tidak memiliki akses untuk melihat nilai.');
+        }
 
         // Filter berdasarkan siswa_id jika ada
         if ($siswaId) {

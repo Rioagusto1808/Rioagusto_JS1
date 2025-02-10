@@ -112,7 +112,7 @@
                 <tbody>
                     @foreach ($siswa as $index => $item)
                         <tr>
-                            <td>{{ $item->id }}</td>
+                            <td>{{ $siswa->firstItem() + $index }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->nis }}</td>
                             <td>{{ $item->tempat_lahir }}</td>
@@ -131,27 +131,35 @@
                             </td>
                             <td>
                                 <a
-                                    href="{{ route('siswa.edit', $item) }}"
-                                    class="btn btn-warning btn-sm shadow-sm"
+                                    href="{{ route('siswa.show', $item) }}"
+                                    class="btn btn-info btn-sm shadow-sm"
                                 >
-                                    <i class="bi bi-pencil-square"></i>
+                                    <i class="bi bi-eye"></i>
                                 </a>
-                                <form
-                                    id="delete-form-{{ $item->id }}"
-                                    action="{{ route('siswa.destroy', $item) }}"
-                                    method="POST"
-                                    style="display: inline"
-                                >
-                                    @csrf
-                                    @method('DELETE')
-                                    <button
-                                        type="button"
-                                        class="btn btn-danger btn-sm shadow-sm"
-                                        onclick="confirmDelete('{{ $item->id }}')"
+                                @if (Auth::user()->can('Guru'))
+                                    <a
+                                        href="{{ route('siswa.edit', $item) }}"
+                                        class="btn btn-warning btn-sm shadow-sm"
                                     >
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <form
+                                        id="delete-form-{{ $item->id }}"
+                                        action="{{ route('siswa.destroy', $item) }}"
+                                        method="POST"
+                                        style="display: inline"
+                                    >
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            type="button"
+                                            class="btn btn-danger btn-sm shadow-sm"
+                                            onclick="confirmDelete('{{ $item->id }}')"
+                                        >
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

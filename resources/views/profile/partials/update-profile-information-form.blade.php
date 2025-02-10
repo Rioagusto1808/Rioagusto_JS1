@@ -81,6 +81,7 @@
                     id="name"
                     class="form-control shadow-sm"
                     value="{{ old('name', $user->name) }}"
+                    disabled
                 />
             </div>
 
